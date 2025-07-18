@@ -14,7 +14,6 @@
       text-align: center;
     }
 
-    /* الشريط العلوي المتحرك */
     .top-banner {
       background-color: #0077b6;
       color: white;
@@ -27,40 +26,38 @@
       font-weight: bold;
     }
 
-    /* أزرار التنقل الثلاثية الأبعاد */
     .nav-buttons {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin: 15px 0;
+      gap: 15px;
+      margin: 20px 0;
       perspective: 1000px;
     }
 
     .nav-button {
       background: linear-gradient(145deg, #00b4d8, #0077b6);
-      border-radius: 15px;
+      border-radius: 12px;
       box-shadow:
-        5px 5px 10px #005f87,
-        -5px -5px 10px #00d1ff;
+        3px 3px 6px #005f87,
+        -3px -3px 6px #00d1ff;
       color: white;
-      font-size: 30px; /* حجم الإيموجي */
+      font-size: 24px;
       font-weight: bold;
-      padding: 12px 20px;
+      padding: 10px;
       text-decoration: none;
       display: inline-block;
-      transform-style: preserve-3d;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 60px;
-      height: 60px;
-      line-height: 60px;
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .nav-button:hover {
-      transform: rotateX(15deg) rotateY(15deg) scale(1.05);
+      transform: rotateX(10deg) rotateY(10deg) scale(1.05);
       box-shadow:
-        8px 8px 15px #004a67,
-        -8px -8px 15px #00f0ff;
+        6px 6px 10px #004a67,
+        -6px -6px 10px #00f0ff;
       cursor: pointer;
     }
 
@@ -107,10 +104,9 @@
       color: #0077b6;
     }
 
-    /* تعديل خاص لحقل الاسم */
     .field.name-field {
       font-weight: bold;
-      color: #d6336c; /* لون وردي داكن مميز */
+      color: #d6336c;
       font-size: 18px;
     }
 
@@ -141,15 +137,13 @@
 </head>
 <body>
 
-  <!-- ✅ الشريط العلوي المتحرك من اليسار إلى اليمين -->
   <div class="top-banner">
     <marquee direction="right">📱 تطبيق العيادات الطبية - البحث عن الطبيب بسهولة وسرعة</marquee>
   </div>
 
-  <!-- أزرار التنقل -->
   <div class="nav-buttons">
-    <a href="https://haiderameri14.github.io/Dr/mu.html" class="nav-button" target="_blank" rel="noopener noreferrer" title="صفحة المختبرات">🔬</a>
-    <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" target="_blank" rel="noopener noreferrer" title="العودة إلى الصفحة الرئيسية">🏠</a>
+    <a href="https://haiderameri14.github.io/Dr/mu.html" class="nav-button" title="صفحة المختبرات">🔬</a>
+    <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" title="العودة إلى الصفحة الرئيسية">🏠</a>
   </div>
 
   <h1>دليل الأطباء</h1>
@@ -178,7 +172,6 @@
       doctors.forEach(doc => {
         const phone = (doc.phone || '').replace(/^'/, '').replace(/'$/, '');
 
-        // بناء الحقول فقط إذا كانت غير فارغة
         let fieldsHTML = '';
 
         if (doc.name) {
