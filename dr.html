@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>دليلل الأطباء</title>
+  <title>دليل الأطباء</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -25,6 +25,39 @@
 
     .top-banner marquee {
       font-weight: bold;
+    }
+
+    /* أزرار التنقل الثلاثية الأبعاد */
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 15px 0;
+      perspective: 1000px;
+    }
+
+    .nav-button {
+      background: linear-gradient(145deg, #00b4d8, #0077b6);
+      border-radius: 15px;
+      box-shadow:
+        5px 5px 10px #005f87,
+        -5px -5px 10px #00d1ff;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px 25px;
+      text-decoration: none;
+      display: inline-block;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-button:hover {
+      transform: rotateX(15deg) rotateY(15deg) scale(1.05);
+      box-shadow:
+        8px 8px 15px #004a67,
+        -8px -8px 15px #00f0ff;
+      cursor: pointer;
     }
 
     h1 {
@@ -73,7 +106,7 @@
     /* تعديل خاص لحقل الاسم */
     .field.name-field {
       font-weight: bold;
-      color: #0000ff; /* لون وردي داكن مميز */
+      color: #d6336c; /* لون وردي داكن مميز */
       font-size: 18px;
     }
 
@@ -107,6 +140,12 @@
   <!-- ✅ الشريط العلوي المتحرك من اليسار إلى اليمين -->
   <div class="top-banner">
     <marquee direction="right">📱 تطبيق العيادات الطبية - البحث عن الطبيب بسهولة وسرعة</marquee>
+  </div>
+
+  <!-- أزرار التنقل -->
+  <div class="nav-buttons">
+    <a href="https://haiderameri14.github.io/Dr/mu.html" class="nav-button" target="_blank" rel="noopener noreferrer">صفحة المختبرات</a>
+    <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" target="_blank" rel="noopener noreferrer">العودة إلى الصفحة الرئيسية</a>
   </div>
 
   <h1>دليل الأطباء</h1>
