@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>دليل المختبرات</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: center;
+    }
+
+    .top-banner {
+      background-color: #0d47a1;
+      color: white;
+      font-size: 14px;
+      padding: 5px 0;
+      overflow: hidden;
+    }
+
+    .top-banner marquee {
+      font-weight: bold;
+    }
+
+    h1 {
+      margin: 10px 0 20px;
+      color: #0d47a1;
+      font-size: 22px;
+    }
+
+    #search {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      text-align: right;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .card:hover {
+      transform: rotateY(3deg) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.25);
+    }
+
+    .field {
+      margin-bottom: 12px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .field strong {
+      color: #0d47a1;
+    }
+
+    .call-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+
+    .call-btn:hover {
+      background-color: #0d47a1;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-banner">
+    <marquee direction="right">🧪 دليل المختبرات الطبية - البحث بسهولة وسرعة</marquee>
+  </div>
+
+  <h1>دليل المختبرات</h1>
+  <input type="text" id="search" placeholder="🔍 ابحث عن مختبر..." onkeyup="filterLabs()" />
+
+  <div id="labList"></div>
+
+  <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
+
+  <script>
+    const API_URL = 'https://api.sheetbest.com/sheets/d6a43902-2f66-4787-9439-a99c8d9de586';
+    let labs = [];
+
+    async function loadLabs() {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      const today = new Date().toISOString().split('T')[0];
+      labs = data.filter(lab => !lab.hide_date || lab.hide_date > today);
+      displayLabs();
+    }
+
+    function displayLabs() {
+      const container = document.getElementById('labList');
+      container.innerHTML = '';
+
+      labs.forEach(lab => {
+        // إزالة علامات الاقتباس من رقم الهاتف
+        const phone = (lab.phone || '').replace(/^'/, '').replace(/'$/, '');
+        const name = lab.name?.trim();
+        const address = lab.address?.trim();
+        const holiday = lab.holiday?.trim();
+        const notes = lab.notes?.trim();
+        const hide_date = lab.hide_date;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        let content = '';
+
+        if (name) content += `<div class="field">🏷️ <strong>اسم المختبر:</strong> ${name}</div>`;
+        if (address) content += `<div class="field">📍 <strong>العنوان:</strong> ${address}</div>`;
+        if (phone) content += `<div class="field">📞 <strong>الهاتف:</strong> ${phone}</div>`;
+        if (holiday) content += `<div class="field">❌ <strong>أيام العطلة:</strong> ${holiday}</div>`;
+        if (notes) content += `<div class="field">📝 <strong>ملاحظات:</strong> ${notes}</div>`;
+        if (phone) content += `<a href="tel:${phone}" class="call-btn">📞 اتصل الآن</a>`;
+
+        // فقط أنشئ البطاقة إذا كانت تحتوي على بيانات
+        if (content) {
+          card.innerHTML = content;
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function filterLabs() {
+      const keyword = document.getElementById('search').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+      });
+    }
+
+    loadLabs();
+  </script>
+
+</body>
+</html>

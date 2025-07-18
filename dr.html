@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>دليل الأطباء</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: center;
+    }
+
+    /* الشريط العلوي المتحرك */
+    .top-banner {
+      background-color: #0077b6;
+      color: white;
+      font-size: 14px;
+      padding: 5px 0;
+      overflow: hidden;
+    }
+
+    .top-banner marquee {
+      font-weight: bold;
+    }
+
+    h1 {
+      margin: 10px 0 20px;
+      color: #023e8a;
+      font-size: 22px;
+    }
+
+    #search {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 500px;
+      text-align: right;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .card:hover {
+      transform: rotateY(3deg) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.25);
+    }
+
+    .field {
+      margin-bottom: 12px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .field strong {
+      color: #0077b6;
+    }
+
+    /* تعديل خاص لحقل الاسم */
+    .field.name-field {
+      font-weight: bold;
+      color: #d6336c; /* لون وردي داكن مميز */
+      font-size: 18px;
+    }
+
+    .call-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      background-color: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 15px;
+      transition: background 0.3s;
+    }
+
+    .call-btn:hover {
+      background-color: #0096c7;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ الشريط العلوي المتحرك من اليسار إلى اليمين -->
+  <div class="top-banner">
+    <marquee direction="right">📱 تطبيق العيادات الطبية - البحث عن الطبيب بسهولة وسرعة</marquee>
+  </div>
+
+  <h1>دليل الأطباء</h1>
+  <input type="text" id="search" placeholder="🔍 ابحث عن طبيب أو تخصص..." onkeyup="filterDoctors()" />
+
+  <div id="doctorList"></div>
+
+  <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
+
+  <script>
+    const API_URL = 'https://api.sheetbest.com/sheets/69580d8a-8ac2-413d-9b67-22bc2506e85e';
+    let doctors = [];
+
+    async function loadDoctors() {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      const today = new Date().toISOString().split('T')[0];
+      doctors = data.filter(doc => !doc.hide_date || doc.hide_date > today);
+      displayDoctors();
+    }
+
+    function displayDoctors() {
+      const container = document.getElementById('doctorList');
+      container.innerHTML = '';
+
+      doctors.forEach(doc => {
+        const phone = (doc.phone || '').replace(/^'/, '').replace(/'$/, '');
+
+        // بناء الحقول فقط إذا كانت غير فارغة
+        let fieldsHTML = '';
+
+        if (doc.name) {
+          fieldsHTML += `<div class="field name-field">👨‍⚕️ <strong>الاسم:</strong> ${doc.name}</div>`;
+        }
+        if (doc.specialty) {
+          fieldsHTML += `<div class="field">🏥 <strong>التخصص:</strong> ${doc.specialty}</div>`;
+        }
+        if (doc.address) {
+          fieldsHTML += `<div class="field">📍 <strong>العنوان:</strong> ${doc.address}</div>`;
+        }
+        if (phone) {
+          fieldsHTML += `<div class="field">📞 <strong>الهاتف:</strong> ${phone}</div>`;
+        }
+        if (doc.holiday) {
+          fieldsHTML += `<div class="field">❌ <strong>أيام العطلة:</strong> ${doc.holiday}</div>`;
+        }
+        if (doc.notes) {
+          fieldsHTML += `<div class="field">📝 <strong>ملاحظات:</strong> ${doc.notes}</div>`;
+        }
+
+        const callBtnHTML = phone ? `<a href="tel:${phone}" class="call-btn">📞 اتصل الآن</a>` : '';
+
+        if(fieldsHTML){
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = fieldsHTML + callBtnHTML;
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function filterDoctors() {
+      const keyword = document.getElementById('search').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+      });
+    }
+
+    loadDoctors();
+  </script>
+
+</body>
+</html>
