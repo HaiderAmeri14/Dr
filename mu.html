@@ -26,6 +26,33 @@
       font-weight: bold;
     }
 
+    /* أزرار التنقل */
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px 0;
+      background-color: #e3f2fd;
+      border-bottom: 1px solid #90caf9;
+      flex-wrap: wrap;
+    }
+
+    .top-buttons a {
+      display: inline-block;
+      font-size: 26px;
+      text-decoration: none;
+      padding: 12px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .top-buttons a:hover {
+      transform: scale(1.1) rotate(-2deg);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+    }
+
     h1 {
       margin: 10px 0 20px;
       color: #0d47a1;
@@ -96,8 +123,15 @@
 </head>
 <body>
 
+  <!-- الشريط المتحرك -->
   <div class="top-banner">
     <marquee direction="right">🧪 دليل المختبرات الطبية - البحث بسهولة وسرعة</marquee>
+  </div>
+
+  <!-- الأزرار أسفل الشريط -->
+  <div class="top-buttons">
+    <a href="https://haiderameri14.github.io/Dr/dr.html" title="دليل الأطباء">🩺</a>
+    <a href="https://haiderameri14.github.io/Dr/ho.html" title="الصفحة الرئيسية">🏠</a>
   </div>
 
   <h1>دليل المختبرات</h1>
@@ -124,13 +158,11 @@
       container.innerHTML = '';
 
       labs.forEach(lab => {
-        // إزالة علامات الاقتباس من رقم الهاتف
         const phone = (lab.phone || '').replace(/^'/, '').replace(/'$/, '');
         const name = lab.name?.trim();
         const address = lab.address?.trim();
         const holiday = lab.holiday?.trim();
         const notes = lab.notes?.trim();
-        const hide_date = lab.hide_date;
 
         const card = document.createElement('div');
         card.className = 'card';
@@ -144,7 +176,6 @@
         if (notes) content += `<div class="field">📝 <strong>ملاحظات:</strong> ${notes}</div>`;
         if (phone) content += `<a href="tel:${phone}" class="call-btn">📞 اتصل الآن</a>`;
 
-        // فقط أنشئ البطاقة إذا كانت تحتوي على بيانات
         if (content) {
           card.innerHTML = content;
           container.appendChild(card);
