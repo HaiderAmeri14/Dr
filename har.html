@@ -105,7 +105,6 @@
       font-size: 18px;
     }
 
-    /* مجموعة الأزرار بجانب بعض */
     .btn-group {
       display: flex;
       justify-content: flex-start;
@@ -147,7 +146,6 @@
   </div>
 
   <div class="nav-buttons">
-    <!-- أزلت زر المختبر -->
     <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" title="العودة إلى الصفحة الرئيسية">🏠</a>
   </div>
 
@@ -220,12 +218,23 @@
       });
     }
 
+    function normalizeArabic(text) {
+      return text
+        .replace(/[\u064B-\u0652]/g, '') // Remove tashkeel
+        .replace(/[آأإ]/g, 'ا')          // Replace Hamza forms with Alif
+        .replace(/ؤ/g, 'و')              // Replace Hamza on Waw
+        .replace(/ئ/g, 'ي')              // Replace Hamza on Ya
+        .replace(/ة/g, 'ه')              // Replace Ta marbuta
+        .replace(/ى/g, 'ي');             // Replace Alif Maqsura with Ya
+    }
+
     function filterDoctors() {
-      const keyword = document.getElementById('search').value.toLowerCase();
+      const keyword = normalizeArabic(document.getElementById('search').value.toLowerCase());
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+        const text = normalizeArabic(card.innerText.toLowerCase());
+        card.style.display = text.includes(keyword) ? 'block' : 'none';
       });
     }
 
