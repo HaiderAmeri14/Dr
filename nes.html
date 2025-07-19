@@ -172,6 +172,15 @@
       displayDoctors();
     }
 
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[\u064B-\u065F]/g, '') // Remove Arabic diacritics
+        .replace(/[أإآ]/g, 'ا') // Normalize hamza forms to alif
+        .replace(/ة/g, 'ه') // Convert ta marbuta to ha
+        .replace(/ى/g, 'ي'); // Convert alif maqsoora to ya
+    }
+
     function displayDoctors() {
       const container = document.getElementById('doctorList');
       container.innerHTML = '';
@@ -220,11 +229,12 @@
     }
 
     function filterDoctors() {
-      const keyword = document.getElementById('search').value.toLowerCase();
+      const keyword = normalize(document.getElementById('search').value);
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+        const text = normalize(card.innerText);
+        card.style.display = text.includes(keyword) ? 'block' : 'none';
       });
     }
 
