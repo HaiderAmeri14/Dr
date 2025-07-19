@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الواجهة الرئيسية</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      text-align: center;
+      background: linear-gradient(135deg, #e3f2fd, #ffffff);
+      overflow-x: hidden;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, #bbdefb 20%, transparent 20%),
+                  radial-gradient(circle, #90caf9 20%, transparent 20%);
+      background-position: 0 0, 50px 50px;
+      background-size: 100px 100px;
+      animation: moveBackground 20s linear infinite;
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    @keyframes moveBackground {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    h1 {
+      margin-top: 50px;
+      font-size: 28px;
+      color: #0d47a1;
+    }
+
+    .buttons-container {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .main-btn {
+      background-color: #ffffff;
+      border: 3px solid #2196f3;
+      color: #0d47a1;
+      padding: 20px 30px;
+      border-radius: 20px;
+      font-size: 22px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      transition: all 0.4s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .main-btn:hover {
+      background-color: #e3f2fd;
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    .footer {
+      margin-top: 100px;
+      padding: 20px;
+      font-size: 16px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="animated-bg"></div>
+
+  <h1>🌟 الواجهة الرئيسية 🌟</h1>
+
+  <div class="buttons-container">
+    <a href="https://haiderameri14.github.io/Dr/dr.html" class="main-btn">🩺 دليل الأطباء</a>
+    <a href="https://haiderameri14.github.io/Dr/mu.html" class="main-btn">🧪 دليل المختبرات</a>
+  </div>
+
+  <div class="footer">
+    برمجة وتصميم: <strong>حيدر العامري</strong> ©
+  </div>
+
+</body>
+</html>
