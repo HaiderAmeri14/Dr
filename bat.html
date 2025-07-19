@@ -172,6 +172,17 @@
       displayDoctors();
     }
 
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[ًٌٍَُِّْ]/g, '') // إزالة الحركات
+        .replace(/[أإآء]/g, 'ا')   // توحيد الهمزات
+        .replace(/ة/g, 'ه')        // توحيد التاء المربوطة
+        .replace(/ى/g, 'ي')        // توحيد الألف المقصورة
+        .replace(/\s+/g, ' ')      // إزالة الفراغات الزائدة
+        .trim();
+    }
+
     function displayDoctors() {
       const container = document.getElementById('doctorList');
       container.innerHTML = '';
@@ -213,6 +224,7 @@
         if(fieldsHTML){
           const card = document.createElement('div');
           card.className = 'card';
+          card.setAttribute('data-search', normalize(card.innerText));
           card.innerHTML = fieldsHTML + buttonsHTML;
           container.appendChild(card);
         }
@@ -220,11 +232,12 @@
     }
 
     function filterDoctors() {
-      const keyword = document.getElementById('search').value.toLowerCase();
+      const keyword = normalize(document.getElementById('search').value);
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+        const content = normalize(card.innerText);
+        card.style.display = content.includes(keyword) ? 'block' : 'none';
       });
     }
 
