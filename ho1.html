@@ -1,100 +1,105 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الواجهة الرئيسية</title>
+  <title>الدليل الطبي الشامل</title>
   <style>
     body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f9fdff, #e0f7fa);
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', sans-serif;
-      direction: rtl;
       text-align: center;
-      background: linear-gradient(135deg, #e3f2fd, #ffffff);
-      overflow-x: hidden;
     }
 
-    .animated-bg {
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, #bbdefb 20%, transparent 20%),
-                  radial-gradient(circle, #90caf9 20%, transparent 20%);
-      background-position: 0 0, 50px 50px;
-      background-size: 100px 100px;
-      animation: moveBackground 20s linear infinite;
-      z-index: -1;
-      opacity: 0.3;
+    .marquee {
+      width: 100%;
+      background-color: #00bcd4;
+      color: white;
+      padding: 10px 0;
+      font-size: 1.5em;
+      overflow: hidden;
+      position: relative;
     }
 
-    @keyframes moveBackground {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .marquee div {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee-right 12s linear infinite;
     }
 
-    h1 {
-      margin-top: 50px;
-      font-size: 28px;
-      color: #0d47a1;
+    @keyframes marquee-right {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
-    .buttons-container {
-      margin-top: 60px;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
     }
 
-    .main-btn {
-      background-color: #ffffff;
-      border: 3px solid #2196f3;
-      color: #0d47a1;
-      padding: 20px 30px;
+    .icon-box {
+      background-color: #ffffffcc;
       border-radius: 20px;
-      font-size: 22px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      transition: all 0.4s ease;
-      animation: pulse 2s infinite;
+      padding: 10px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
     }
 
-    .main-btn:hover {
-      background-color: #e3f2fd;
+    .icon-box:hover {
       transform: scale(1.05);
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-      100% { transform: scale(1); }
+    .icon-box span {
+      font-size: 2em;
+      display: block;
+      margin-bottom: 8px;
     }
 
-    .footer {
-      margin-top: 100px;
-      padding: 20px;
-      font-size: 16px;
-      color: #444;
+    .icon-box a {
+      color: #000;
+      text-decoration: none;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
 
-  <div class="animated-bg"></div>
-
-  <h1>🌟 الواجهة الرئيسية 🌟</h1>
-
-  <div class="buttons-container">
-    <a href="https://haiderameri14.github.io/Dr/dr.html" class="main-btn">🩺 دليل الأطباء</a>
-    <a href="https://haiderameri14.github.io/Dr/mu.html" class="main-btn">🧪 دليل المختبرات</a>
+  <div class="marquee">
+    <div>الدليل الطبي الشامل في محافظة كربلاء</div>
   </div>
 
-  <div class="footer">
-    برمجة وتصميم: <strong>حيدر العامري</strong> ©
+  <div class="grid">
+    <a href="https://haiderameri14.github.io/Dr/dr.html">
+      <div class="icon-box"><span>👨‍⚕️</span><div>كل الأطباء</div></div>
+    </a>
+    <div class="icon-box"><span>🦻</span><div>الأنف والأذن والحنجرة</div></div>
+    <div class="icon-box"><span>🦷</span><div>أطباء الأسنان</div></div>
+    <div class="icon-box"><span>❤️</span><div>أطباء القلبية</div></div>
+    <div class="icon-box"><span>👶</span><div>أطباء الأطفال</div></div>
+    <div class="icon-box"><span>🩺</span><div>أطباء الباطنية</div></div>
+    <div class="icon-box"><span>🤰</span><div>النسائية والتوليد</div></div>
+    <div class="icon-box"><span>🧠</span><div>الطب النفسي</div></div>
+    <div class="icon-box"><span>🏥</span><div>جراحة عامة</div></div>
+    <div class="icon-box"><span>🌞</span><div>الجلدية</div></div>
+    <div class="icon-box"><span>🧠</span><div>الجملة العصبية</div></div>
+    <div class="icon-box"><span>🦴</span><div>العظام والمفاصل</div></div>
+    <div class="icon-box"><span>💦</span><div>البولية</div></div>
+    <div class="icon-box"><span>👁️</span><div>العيون</div></div>
+    <div class="icon-box"><span>🎗️</span><div>الأورام</div></div>
+    <div class="icon-box"><span>💉</span><div>التخدير</div></div>
+    <div class="icon-box"><span>💆‍♀️</span><div>التجميلية</div></div>
+    <div class="icon-box"><span>👨‍👩‍👧‍👦</span><div>طب الأسرة</div></div>
+    <div class="icon-box"><span>⚙️</span><div>الفسلجة</div></div>
+    <div class="icon-box"><span>🥗</span><div>التغذية</div></div>
+    <div class="icon-box"><span>🏃</span><div>العلاج الطبيعي</div></div>
+    <div class="icon-box"><span>🩻</span><div>الأشعة</div></div>
+    <div class="icon-box"><span>🧪</span><div>المختبرات</div></div>
   </div>
 
 </body>
