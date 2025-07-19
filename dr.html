@@ -105,7 +105,6 @@
       font-size: 18px;
     }
 
-    /* مجموعة الأزرار بجانب بعض */
     .btn-group {
       display: flex;
       justify-content: flex-start;
@@ -170,6 +169,19 @@
       displayDoctors();
     }
 
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[أإآا]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/ؤ/g, 'و')
+        .replace(/ئ/g, 'ي')
+        .replace(/ة/g, 'ه')
+        .replace(/[\u064B-\u065F]/g, '') // حذف التشكيل
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
     function displayDoctors() {
       const container = document.getElementById('doctorList');
       container.innerHTML = '';
@@ -218,11 +230,12 @@
     }
 
     function filterDoctors() {
-      const keyword = document.getElementById('search').value.toLowerCase();
+      const keyword = normalize(document.getElementById('search').value);
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+        const cardText = normalize(card.innerText);
+        card.style.display = cardText.includes(keyword) ? 'block' : 'none';
       });
     }
 
