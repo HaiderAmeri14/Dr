@@ -1,101 +1,104 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الواجهة الرئيسية</title>
+  <title>دليلك الشامل</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap');
+
     body {
+      font-family: 'Cairo', sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Cairo', sans-serif;
-      direction: rtl;
-      text-align: center;
-      background: linear-gradient(135deg, #e3f2fd, #ffffff);
       overflow-x: hidden;
+      background: linear-gradient(-45deg, #f3ec78, #af4261, #2b5876, #4e4376);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
 
-    .animated-bg {
-      position: fixed;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, #bbdefb 20%, transparent 20%),
-                  radial-gradient(circle, #90caf9 20%, transparent 20%);
-      background-position: 0 0, 50px 50px;
-      background-size: 100px 100px;
-      animation: moveBackground 20s linear infinite;
-      z-index: -1;
-      opacity: 0.3;
-    }
-
-    @keyframes moveBackground {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     h1 {
-      margin-top: 50px;
-      font-size: 28px;
-      color: #0d47a1;
+      text-align: center;
+      color: white;
+      margin-top: 30px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 5px #000;
     }
 
-    .buttons-container {
-      margin-top: 60px;
+    .container {
       display: flex;
-      justify-content: center;
-      gap: 30px;
       flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
     }
 
-    .main-btn {
-      background-color: #ffffff;
-      border: 3px solid #2196f3;
-      color: #0d47a1;
-      padding: 20px 30px;
-      border-radius: 20px;
-      font-size: 22px;
-      font-weight: bold;
+    .icon-box {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
       text-decoration: none;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      transition: all 0.4s ease;
-      animation: pulse 2s infinite;
     }
 
-    .main-btn:hover {
-      background-color: #e3f2fd;
-      transform: scale(1.05);
+    .icon-box:hover {
+      transform: scale(1.1);
+      background: #fffaec;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-      100% { transform: scale(1); }
+    .icon {
+      font-size: 2.5em;
     }
 
-    .footer {
-      margin-top: 100px;
-      padding: 20px;
-      font-size: 16px;
-      color: #444;
+    .label {
+      margin-top: 8px;
+      font-size: 0.9em;
+      color: #333;
+      font-weight: bold;
     }
+
   </style>
 </head>
 <body>
-
-  <div class="animated-bg"></div>
-
-  <h1>🌟 الواجهة الرئيسية 🌟</h1>
-
-  <div class="buttons-container">
-    <a href="https://haiderameri14.github.io/Dr/dr.html" class="main-btn">🩺 دليل الأطباء</a>
-    <a href="https://haiderameri14.github.io/Dr/mu.html" class="main-btn">🧪 دليل المختبرات</a>
+  <h1>دليلك الشامل</h1>
+  <div class="container">
+    <a class="icon-box" href="https://haiderameri14.github.io/Dr/ho1.html">
+      <div class="icon">🏥</div>
+      <div class="label">الدليل الصحي</div>
+    </a>
+    <div class="icon-box">
+      <div class="icon">🛒</div>
+      <div class="label">أسواق</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">🍽️</div>
+      <div class="label">مطاعم</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">🛠️</div>
+      <div class="label">أعمال حرفية</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">🏫</div>
+      <div class="label">مدارس</div>
+    </div>
+    <div class="icon-box">
+      <div class="icon">🕌</div>
+      <div class="label">جوامع</div>
+    </div>
   </div>
-
-  <div class="footer">
-    برمجة وتصميم: <strong>حيدر العامري</strong> ©
-  </div>
-
 </body>
 </html>
