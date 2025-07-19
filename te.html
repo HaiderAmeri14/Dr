@@ -105,7 +105,6 @@
       font-size: 18px;
     }
 
-    /* مجموعة الأزرار بجانب بعض */
     .btn-group {
       display: flex;
       justify-content: flex-start;
@@ -147,7 +146,6 @@
   </div>
 
   <div class="nav-buttons">
-    <!-- تمت إزالة أيقونة المختبر -->
     <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" title="العودة إلى الصفحة الرئيسية">🏠</a>
   </div>
 
@@ -171,6 +169,18 @@
         doc.specialty && doc.specialty.includes("الأسنان")
       );
       displayDoctors();
+    }
+
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[أإآ]/g, "ا")
+        .replace(/ى/g, "ي")
+        .replace(/ؤ/g, "و")
+        .replace(/ئ/g, "ي")
+        .replace(/[ًٌٍَُِّْ]/g, "")
+        .replace(/\s+/g, ' ')
+        .trim();
     }
 
     function displayDoctors() {
@@ -221,11 +231,12 @@
     }
 
     function filterDoctors() {
-      const keyword = document.getElementById('search').value.toLowerCase();
+      const keyword = normalize(document.getElementById('search').value);
       const cards = document.querySelectorAll('.card');
 
       cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+        const cardText = normalize(card.innerText);
+        card.style.display = cardText.includes(keyword) ? 'block' : 'none';
       });
     }
 
