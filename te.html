@@ -217,7 +217,8 @@
           buttonsHTML += `<a href="tel:${phone}" class="call-btn" title="اتصل الآن">📞</a>`;
         }
         if (mapLink) {
-          buttonsHTML += `<a href="${mapLink}" class="map-btn" target="_blank" rel="noopener" title="عرض على الخريطة">🗺️</a>`;
+          const geoLink = `geo:0,0?q=${encodeURIComponent(mapLink)}`;
+          buttonsHTML += `<a href="${geoLink}" class="map-btn" title="عرض على الخريطة">🗺️</a>`;
         }
         buttonsHTML += `</div>`;
 
