@@ -189,7 +189,7 @@
       const container = document.getElementById('doctorList');
       container.innerHTML = '';
 
-      doctors.forEach(doc => {
+      [...doctors].reverse().forEach(doc => {
         const phone = (doc.phone || '').replace(/^'/, '').replace(/'$/, '');
         const mapLink = doc.map || '';
 
