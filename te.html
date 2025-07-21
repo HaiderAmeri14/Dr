@@ -13,6 +13,7 @@
       direction: rtl;
       text-align: center;
     }
+
     .top-banner {
       background-color: #0077b6;
       color: white;
@@ -20,9 +21,11 @@
       padding: 5px 0;
       overflow: hidden;
     }
+
     .top-banner marquee {
       font-weight: bold;
     }
+
     .nav-buttons {
       display: flex;
       justify-content: center;
@@ -30,6 +33,7 @@
       margin: 20px 0;
       perspective: 1000px;
     }
+
     .nav-button {
       background: linear-gradient(145deg, #00b4d8, #0077b6);
       border-radius: 12px;
@@ -46,16 +50,19 @@
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .nav-button:hover {
       transform: rotateX(10deg) rotateY(10deg) scale(1.05);
       box-shadow: 6px 6px 10px #004a67, -6px -6px 10px #00f0ff;
       cursor: pointer;
     }
+
     h1 {
       margin: 10px 0 20px;
       color: #023e8a;
       font-size: 22px;
     }
+
     #search {
       width: 90%;
       padding: 10px;
@@ -64,6 +71,7 @@
       border: 1px solid #ccc;
       font-size: 16px;
     }
+
     .card {
       background: white;
       border-radius: 20px;
@@ -75,29 +83,35 @@
       transition: transform 0.4s ease, box-shadow 0.4s ease;
       transform-style: preserve-3d;
     }
+
     .card:hover {
       transform: rotateY(3deg) scale(1.02);
       box-shadow: 0 20px 30px rgba(0,0,0,0.25);
     }
+
     .field {
       margin-bottom: 12px;
       font-size: 17px;
       line-height: 1.6;
     }
+
     .field strong {
       color: #0077b6;
     }
+
     .field.name-field {
       font-weight: bold;
       color: #d6336c;
       font-size: 18px;
     }
+
     .btn-group {
       display: flex;
       justify-content: flex-start;
       gap: 10px;
       margin-top: 15px;
     }
+
     .call-btn,
     .map-btn {
       display: inline-block;
@@ -111,10 +125,12 @@
       transition: background 0.3s;
       user-select: none;
     }
+
     .call-btn:hover,
     .map-btn:hover {
       background-color: #0096c7;
     }
+
     .footer {
       margin-top: 40px;
       padding: 10px;
@@ -130,6 +146,7 @@
   </div>
 
   <div class="nav-buttons">
+    <a href="https://haiderameri14.github.io/Dr/ho1.html" class="nav-button" title="الدليل الصحي">🏥</a>
     <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" title="العودة إلى الصفحة الرئيسية">🏠</a>
   </div>
 
@@ -158,12 +175,13 @@
     function normalize(text) {
       return text
         .toLowerCase()
-        .replace(/[أإآ]/g, "ا")
-        .replace(/ى/g, "ي")
-        .replace(/ؤ/g, "و")
-        .replace(/ئ/g, "ي")
-        .replace(/[ًٌٍَُِّْ]/g, "")
-        .replace(/\s+/g, ' ')
+        .replace(/[أإآا]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/ؤ/g, 'و')
+        .replace(/ئ/g, 'ي')
+        .replace(/ة/g, 'ه')
+        .replace(/[\u064B-\u065F]/g, '') // حذف التشكيل
+        .replace(/\s+/g, ' ') // تقليل الفراغات
         .trim();
     }
 
