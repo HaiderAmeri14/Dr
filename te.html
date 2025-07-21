@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>دليل أطباء الأسنان</title>
   <style>
-    /* نفس التنسيقات بدون تغيير */
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom, #e0f7fa, #ffffff);
@@ -202,8 +201,8 @@
           buttonsHTML += `<a href="tel:${phone}" class="call-btn" title="اتصل الآن">📞</a>`;
         }
         if (mapLink) {
-          const intentLink = `intent://maps.google.com/maps?q=${encodeURIComponent(mapLink)}#Intent;scheme=https;package=com.google.android.apps.maps;end`;
-          buttonsHTML += `<a href="${intentLink}" class="map-btn" title="عرض على الخريطة">🗺️</a>`;
+          const geoLink = `geo:0,0?q=${encodeURIComponent(mapLink)}`;
+          buttonsHTML += `<a href="${geoLink}" class="map-btn" title="عرض على الخريطة">🗺️</a>`;
         }
         buttonsHTML += `</div>`;
 
