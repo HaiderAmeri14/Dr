@@ -5,20 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>الدليل الطبي الشامل</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f9fdff, #e0f7fa);
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap');
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      text-align: center;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f1f6fb;
+      color: #333;
     }
 
     .marquee {
-      width: 100%;
-      background-color: #00bcd4;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
       color: white;
-      padding: 10px 0;
-      font-size: 1.5em;
+      padding: 15px 0;
+      font-size: 1.3em;
+      font-weight: bold;
+      text-align: center;
       overflow: hidden;
       position: relative;
     }
@@ -26,54 +33,72 @@
     .marquee div {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee-right 12s linear infinite;
+      animation: scroll 12s linear infinite;
     }
 
-    @keyframes marquee-right {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
-      padding: 20px;
-      max-width: 900px;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      padding: 30px 20px;
+      max-width: 1000px;
       margin: auto;
     }
 
     .icon-box {
-      background-color: #ffffffcc;
-      border-radius: 20px;
-      padding: 10px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
       cursor: pointer;
-      color: #000;
       text-decoration: none;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 110px;
     }
 
     .icon-box:hover {
-      transform: scale(1.05);
-      background-color: #e0f7fa;
-      color: #007c91;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      background: #e6f7ff;
     }
 
-    .icon-box span {
-      font-size: 2em;
-      margin-bottom: 8px;
-      user-select: none;
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom right, #d0f1ff, #aee1ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      color: #005c99;
     }
 
-    .icon-box div {
-      font-size: 0.9em;
-      user-select: none;
+    .label {
+      font-size: 0.95em;
+      font-weight: 600;
+      color: #333;
+    }
+
+    @media (max-width: 480px) {
+      .icon-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+      }
+
+      .label {
+        font-size: 0.85em;
+      }
     }
   </style>
 </head>
@@ -84,28 +109,28 @@
   </div>
 
   <div class="grid">
-    <a href="https://haiderameri14.github.io/Dr/dr.html" class="icon-box"><span>👨‍⚕️</span><div>كل الأطباء</div></a>
-    <a href="https://haiderameri14.github.io/Dr/an.html" class="icon-box"><span>🦻</span><div>الأنف والأذن والحنجرة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/te.html" class="icon-box"><span>🦷</span><div>أطباء الأسنان</div></a>
-    <a href="https://haiderameri14.github.io/Dr/har.html" class="icon-box"><span>❤️</span><div>أطباء القلبية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/ch.html" class="icon-box"><span>👶</span><div>أطباء الأطفال</div></a>
-    <a href="https://haiderameri14.github.io/Dr/bat.html" class="icon-box"><span>🩺</span><div>أطباء الباطنية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/nes.html" class="icon-box"><span>🤰</span><div>النسائية والتوليد</div></a>
-    <a href="https://haiderameri14.github.io/Dr/nf.html" class="icon-box"><span>🧠</span><div>الطب النفسي</div></a>
-    <a href="https://haiderameri14.github.io/Dr/gra.html" class="icon-box"><span>🏥</span><div>جراحة عامة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/gel.html" class="icon-box"><span>🌞</span><div>الجلدية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/gmla.html" class="icon-box"><span>🧠</span><div>الجملة العصبية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/eda.html" class="icon-box"><span>🦴</span><div>العظام والمفاصل</div></a>
-    <a href="https://haiderameri14.github.io/Dr/bol.html" class="icon-box"><span>💦</span><div>البولية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/eun.html" class="icon-box"><span>👁️</span><div>العيون</div></a>
-    <a href="https://haiderameri14.github.io/Dr/awr.html" class="icon-box"><span>🎗️</span><div>الأورام</div></a>
-    <a href="https://haiderameri14.github.io/Dr/tak.html" class="icon-box"><span>💉</span><div>التخدير</div></a>
-    <a href="https://haiderameri14.github.io/Dr/tgm.html" class="icon-box"><span>💆‍♀️</span><div>التجميلية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/asr.html" class="icon-box"><span>👨‍👩‍👧‍👦</span><div>طب الأسرة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/fsl.html" class="icon-box"><span>⚙️</span><div>الفسلجة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/tagd.html" class="icon-box"><span>🥗</span><div>التغذية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/elag.html" class="icon-box"><span>🏃</span><div>العلاج الطبيعي</div></a>
-    <a href="https://haiderameri14.github.io/Dr/ash.html" class="icon-box"><span>🩻</span><div>الأشعة التشخيصية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/dr.html" class="icon-box"><div class="icon-circle">👨‍⚕️</div><div class="label">كل الأطباء</div></a>
+    <a href="https://haiderameri14.github.io/Dr/an.html" class="icon-box"><div class="icon-circle">🦻</div><div class="label">الأنف والأذن والحنجرة</div></a>
+    <a href="https://haiderameri14.github.io/Dr/te.html" class="icon-box"><div class="icon-circle">🦷</div><div class="label">أطباء الأسنان</div></a>
+    <a href="https://haiderameri14.github.io/Dr/har.html" class="icon-box"><div class="icon-circle">❤️</div><div class="label">أطباء القلبية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/ch.html" class="icon-box"><div class="icon-circle">👶</div><div class="label">أطباء الأطفال</div></a>
+    <a href="https://haiderameri14.github.io/Dr/bat.html" class="icon-box"><div class="icon-circle">🩺</div><div class="label">أطباء الباطنية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/nes.html" class="icon-box"><div class="icon-circle">🤰</div><div class="label">النسائية والتوليد</div></a>
+    <a href="https://haiderameri14.github.io/Dr/nf.html" class="icon-box"><div class="icon-circle">🧠</div><div class="label">الطب النفسي</div></a>
+    <a href="https://haiderameri14.github.io/Dr/gra.html" class="icon-box"><div class="icon-circle">🏥</div><div class="label">جراحة عامة</div></a>
+    <a href="https://haiderameri14.github.io/Dr/gel.html" class="icon-box"><div class="icon-circle">🌞</div><div class="label">الجلدية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/gmla.html" class="icon-box"><div class="icon-circle">🧠</div><div class="label">الجملة العصبية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/eda.html" class="icon-box"><div class="icon-circle">🦴</div><div class="label">العظام والمفاصل</div></a>
+    <a href="https://haiderameri14.github.io/Dr/bol.html" class="icon-box"><div class="icon-circle">💦</div><div class="label">البولية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/eun.html" class="icon-box"><div class="icon-circle">👁️</div><div class="label">العيون</div></a>
+    <a href="https://haiderameri14.github.io/Dr/awr.html" class="icon-box"><div class="icon-circle">🎗️</div><div class="label">الأورام</div></a>
+    <a href="https://haiderameri14.github.io/Dr/tak.html" class="icon-box"><div class="icon-circle">💉</div><div class="label">التخدير</div></a>
+    <a href="https://haiderameri14.github.io/Dr/tgm.html" class="icon-box"><div class="icon-circle">💆‍♀️</div><div class="label">التجميلية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/asr.html" class="icon-box"><div class="icon-circle">👨‍👩‍👧‍👦</div><div class="label">طب الأسرة</div></a>
+    <a href="https://haiderameri14.github.io/Dr/fsl.html" class="icon-box"><div class="icon-circle">⚙️</div><div class="label">الفسلجة</div></a>
+    <a href="https://haiderameri14.github.io/Dr/tagd.html" class="icon-box"><div class="icon-circle">🥗</div><div class="label">التغذية</div></a>
+    <a href="https://haiderameri14.github.io/Dr/elag.html" class="icon-box"><div class="icon-circle">🏃</div><div class="label">العلاج الطبيعي</div></a>
+    <a href="https://haiderameri14.github.io/Dr/ash.html" class="icon-box"><div class="icon-circle">🩻</div><div class="label">الأشعة التشخيصية</div></a>
   </div>
 
 </body>
