@@ -201,8 +201,8 @@
           buttonsHTML += `<a href="tel:${phone}" class="call-btn" title="اتصل الآن">📞</a>`;
         }
         if (mapLink) {
-          const geoLink = `geo:0,0?q=${encodeURIComponent(mapLink)}`;
-          buttonsHTML += `<a href="${geoLink}" class="map-btn" title="عرض على الخريطة">🗺️</a>`;
+          const geoLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapLink)}`;
+          buttonsHTML += `<a href="${geoLink}" class="map-btn" target="_blank" rel="noopener" title="عرض على الخريطة">🗺️</a>`;
         }
         buttonsHTML += `</div>`;
 
