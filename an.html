@@ -131,18 +131,6 @@
       background-color: #0096c7;
     }
 
-    .stars {
-      cursor: pointer;
-      font-size: 24px;
-      color: #f7b500;
-      user-select: none;
-      display: inline-block;
-    }
-
-    .star {
-      padding: 0 3px;
-    }
-
     .footer {
       margin-top: 40px;
       padding: 10px;
@@ -171,36 +159,12 @@
 
 <script>
 const DOCTORS_API = 'https://api.sheetbest.com/sheets/69580d8a-8ac2-413d-9b67-22bc2506e85e';
-const RATINGS_API = 'https://sheetdb.io/api/v1/tmtkv91fxhnn6';
 
 let doctors = [];
-let ratings = [];
-
-function getAverageRating(name) {
-  const filtered = ratings.filter(r => r.name === name);
-  if (filtered.length === 0) return 0;
-  const sum = filtered.reduce((acc, r) => acc + Number(r.rating), 0);
-  return sum / filtered.length;
-}
-
-function getUserRating(name) {
-  const store = JSON.parse(localStorage.getItem('userRatings') || '{}');
-  return store[name] || 0;
-}
-
-function saveUserRating(name, rating) {
-  const store = JSON.parse(localStorage.getItem('userRatings') || '{}');
-  store[name] = rating;
-  localStorage.setItem('userRatings', JSON.stringify(store));
-}
 
 async function loadDoctors() {
-  const [resDoctors, resRatings] = await Promise.all([
-    fetch(DOCTORS_API),
-    fetch(RATINGS_API)
-  ]);
+  const resDoctors = await fetch(DOCTORS_API);
   const docData = await resDoctors.json();
-  ratings = await resRatings.json();
 
   const today = new Date().toISOString().split('T')[0];
   doctors = docData.filter(d =>
@@ -217,9 +181,6 @@ function displayDoctors() {
   [...doctors].reverse().forEach(doc => {
     const phone = (doc.phone || '').replace(/^'/, '').replace(/'$/, '');
     const mapLink = doc.map || '';
-    const avgRating = getAverageRating(doc.name);
-    const userRating = getUserRating(doc.name);
-    const roundedAvg = Math.round(avgRating * 2) / 2;
 
     let fieldsHTML = '';
     if (doc.name) fieldsHTML += `<div class="field name-field">👨‍⚕️ <strong>الاسم:</strong> ${doc.name}</div>`;
@@ -229,20 +190,6 @@ function displayDoctors() {
     if (doc.holiday) fieldsHTML += `<div class="field">❌ <strong>أيام العطلة:</strong> ${doc.holiday}</div>`;
     if (doc.notes) fieldsHTML += `<div class="field">📝 <strong>ملاحظات:</strong> ${doc.notes}</div>`;
 
-    const avgStars = [...Array(5).keys()].map(i => {
-      const index = i + 1;
-      if (index <= roundedAvg) return '★';
-      if (index - 0.5 === roundedAvg) return '⯪';
-      return '☆';
-    }).join('');
-
-    let avgHTML = `<div class="field"><strong>⭐ متوسط التقييم:</strong> ${avgStars} (${avgRating.toFixed(2)})</div>`;
-    let userHTML = `<div class="field"><strong>⭐ تقييمك:</strong>
-      <span class="stars" data-name="${doc.name}" data-rated="${userRating}">
-        ${[1,2,3,4,5].map(i => `<span class="star" data-value="${i}">${i <= userRating ? '★' : '☆'}</span>`).join('')}
-      </span>
-    </div>`;
-
     let buttonsHTML = `<div class="btn-group">`;
     if (phone) buttonsHTML += `<a href="tel:${phone}" class="call-btn" title="اتصل الآن">📞</a>`;
     if (mapLink) buttonsHTML += `<a href="${mapLink}" class="map-btn" target="_blank" rel="noopener" title="عرض على الخريطة">🗺️</a>`;
@@ -250,43 +197,10 @@ function displayDoctors() {
 
     const card = document.createElement('div');
     card.className = 'card';
-    card.innerHTML = fieldsHTML + buttonsHTML + avgHTML + userHTML;
+    card.innerHTML = fieldsHTML + buttonsHTML;
     container.appendChild(card);
   });
 }
-
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('star')) {
-    const value = parseInt(e.target.dataset.value);
-    const container = e.target.closest('.stars');
-    const name = container.dataset.name;
-
-    container.dataset.rated = value;
-    [...container.children].forEach(s => {
-      const v = parseInt(s.dataset.value);
-      s.textContent = v <= value ? '★' : '☆';
-    });
-
-    fetch(RATINGS_API, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ name: name, rating: value, created_at: new Date().toISOString() })
-    })
-    .then(() => {
-      saveUserRating(name, value);
-      return fetch(RATINGS_API);
-    })
-    .then(res => res.json())
-    .then(data => {
-      ratings = data;
-      displayDoctors();
-    })
-    .catch(err => {
-      alert('حدث خطأ أثناء إرسال التقييم.');
-      console.error(err);
-    });
-  }
-});
 
 function normalize(text) {
   return text
