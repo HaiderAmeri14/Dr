@@ -119,16 +119,7 @@
     font-size: 14px;
     color: #555;
   }
-  .stars {
-    cursor: pointer;
-    font-size: 24px;
-    color: #f7b500;
-    user-select: none;
-    display: inline-block;
-  }
-  .star {
-    padding: 0 3px;
-  }
+  /* أزلت تعريفات النجوم المتعلقة بالتقييم */
 </style>
 </head>
 <body>
@@ -150,21 +141,16 @@
 <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
 
 <script>
-const DOCTORS_API = 'https://api.sheetbest.com/sheets/69580d8a-8ac2-413d-9b67-22bc2506e85e';  // بيانات الأطباء
-const RATINGS_API = 'https://sheetdb.io/api/v1/tmtkv91fxhnn6'; // تقييمات SheetDB
+const DOCTORS_API = 'https://api.sheetbest.com/sheets/69580d8a-8ac2-413d-9b67-22bc2506e85e';
 
 let doctors = [];
 let ratings = [];
 
-// تحميل بيانات الأطباء والتقييمات معًا
+// تحميل بيانات الأطباء فقط (إلغاء تحميل وتحديث التقييمات)
 async function loadData() {
   try {
-    const [doctorsRes, ratingsRes] = await Promise.all([
-      fetch(DOCTORS_API),
-      fetch(RATINGS_API)
-    ]);
+    const doctorsRes = await fetch(DOCTORS_API);
     doctors = await doctorsRes.json();
-    ratings = await ratingsRes.json();
 
     displayDoctors();
   } catch(err) {
@@ -172,28 +158,7 @@ async function loadData() {
   }
 }
 
-// دالة لحساب متوسط التقييم لكل طبيب حسب الاسم
-function getAverageRating(name) {
-  const doctorRatings = ratings.filter(r => r.name === name);
-  if (doctorRatings.length === 0) return 0;
-  const sum = doctorRatings.reduce((acc, r) => acc + Number(r.rating), 0);
-  return (sum / doctorRatings.length);
-}
-
-// دالة لجلب تقييم المستخدم الحالي من localStorage
-function getUserRating(name) {
-  const userRatings = JSON.parse(localStorage.getItem('userRatings') || '{}');
-  return userRatings[name] || 0;
-}
-
-// حفظ تقييم المستخدم في localStorage
-function saveUserRating(name, rating) {
-  const userRatings = JSON.parse(localStorage.getItem('userRatings') || '{}');
-  userRatings[name] = rating;
-  localStorage.setItem('userRatings', JSON.stringify(userRatings));
-}
-
-// عرض الأطباء مع التقييمات
+// عرض الأطباء بدون تقييمات
 function displayDoctors() {
   const container = document.getElementById('doctorList');
   container.innerHTML = '';
@@ -204,11 +169,6 @@ function displayDoctors() {
   filteredDoctors.reverse().forEach(doc => {
     const phone = (doc.phone || '').replace(/^'/, '').replace(/'$/, '');
     const mapLink = doc.map || '';
-
-    // متوسط التقييم
-    const avgRating = getAverageRating(doc.name);
-    // تقييم المستخدم الحالي (حسب localStorage)
-    const userRating = getUserRating(doc.name);
 
     let fieldsHTML = '';
     if (doc.name) fieldsHTML += `<div class="field name-field">👨‍⚕️ <strong>الاسم:</strong> ${doc.name}</div>`;
@@ -223,37 +183,10 @@ function displayDoctors() {
     if (mapLink) buttonsHTML += `<a href="${mapLink}" class="map-btn" target="_blank" rel="noopener" title="عرض على الخريطة">🗺️</a>`;
     buttonsHTML += `</div>`;
 
-    // نجوم متوسط التقييم (تقريب لأقرب 0.5)
-    const roundedAvg = Math.round(avgRating * 2) / 2;
-
-    let avgStarsHTML = `<div class="field"><strong>⭐ متوسط التقييم:</strong> `;
-    for (let i = 1; i <= 5; i++) {
-      if (i <= roundedAvg) {
-        avgStarsHTML += '★';
-      } else if (i - 0.5 === roundedAvg) {
-        avgStarsHTML += '⯪'; // نجمة نصفية (تقديرية)
-      } else {
-        avgStarsHTML += '☆';
-      }
-    }
-    avgStarsHTML += ` (${avgRating.toFixed(2)})</div>`;
-
-    // نجوم تقييم المستخدم (تعديل التقييم)
-    let userStarsHTML = `
-      <div class="field">
-        <strong>⭐ تقييمك:</strong>
-        <span class="stars" data-name="${doc.name}" data-rated="${userRating}">
-          ${[1,2,3,4,5].map(i => `<span class="star" data-value="${i}">${i <= userRating ? '★' : '☆'}</span>`).join('')}
-        </span>
-      </div>
-    `;
-
-    if(fieldsHTML){
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = fieldsHTML + buttonsHTML + avgStarsHTML + userStarsHTML;
-      container.appendChild(card);
-    }
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = fieldsHTML + buttonsHTML;
+    container.appendChild(card);
   });
 }
 
@@ -280,52 +213,7 @@ function normalize(text) {
     .trim();
 }
 
-// التعامل مع نقرات تقييم النجوم
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('star')) {
-    const star = e.target;
-    const value = parseInt(star.getAttribute('data-value'));
-    const starsContainer = star.parentElement;
-    const doctorName = starsContainer.getAttribute('data-name');
-
-    // تحديث عرض النجوم للمستخدم فوراً
-    starsContainer.setAttribute('data-rated', value);
-    [...starsContainer.children].forEach(s => {
-      const starValue = parseInt(s.getAttribute('data-value'));
-      s.textContent = starValue <= value ? '★' : '☆';
-    });
-
-    // إرسال التقييم (إضافة صف جديد) إلى SheetDB
-    fetch(RATINGS_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: doctorName, rating: value, created_at: new Date().toISOString() })
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('فشل إرسال التقييم');
-      return res.json();
-    })
-    .then(() => {
-      // تحديث localStorage لتذكر تقييم المستخدم
-      saveUserRating(doctorName, value);
-      // إعادة تحميل التقييمات من API لتحديث المتوسط (اختياري)
-      return fetch(RATINGS_API);
-    })
-    .then(res => res.json())
-    .then(newRatings => {
-      ratings = newRatings;
-      displayDoctors();
-    })
-    .catch(err => {
-      console.error('خطأ في إرسال التقييم:', err);
-      alert('حدث خطأ أثناء إرسال التقييم. حاول مرة أخرى.');
-    });
-  }
-});
-
-// بدء التحميل
 loadData();
-
 </script>
 
 </body>
