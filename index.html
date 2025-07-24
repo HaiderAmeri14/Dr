@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta http-equiv="refresh" content="0; url=https://haiderameri14.github.io/Dr/ho.html" />
   <title>إعادة توجيه</title>
+  <script>
+    // تسجيل السيرفيس ووركر لعرض صفحة offline.html عند فقدان الإنترنت
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
 </head>
 <body>
   <p>جاري تحويلك إلى <a href="https://haiderameri14.github.io/Dr/ho.html">الصفحة الرئيسية</a>...</p>
