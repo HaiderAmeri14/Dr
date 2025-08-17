@@ -156,20 +156,26 @@
   <div id="doctorList"></div>
 
   <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
-
-  <script>
-    const API_URL = 'https://api.sheetbest.com/sheets/69580d8a-8ac2-413d-9b67-22bc2506e85e';
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQMMzmV96oKhiKuCWioFHi7XacyB-3g7cGWg2ifWuSfL2fgRqfehkskCKdcEqRTaH_SQ/exec';
+    
     let doctors = [];
 
     async function loadDoctors() {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      const today = new Date().toISOString().split('T')[0];
-      doctors = data.filter(doc => 
-        (!doc.hide_date || doc.hide_date > today) &&
-        doc.specialty && doc.specialty.includes("التجميلية")
-      );
-      displayDoctors();
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=getSheetData`);
+        const data = await res.json();
+        const today = new Date().toISOString().split('T')[0];
+
+        doctors = data.filter(doc =>
+          (!doc.hide_date || doc.hide_date > today) &&
+          doc.specialty && doc.specialty.includes("التجميلية")
+        );
+        displayDoctors();
+      } catch (error) {
+        console.error('Error fetching doctors data:', error);
+        document.getElementById('doctorList').innerHTML = '<p style="color:red; text-align:center;">حدث خطأ أثناء جلب البيانات. يرجى التأكد من أن رابط السكربت صحيح.</p>';
+      }
     }
 
     function normalize(text) {
