@@ -140,29 +140,26 @@
 
 <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
 
-<script>
-const DOCTORS_API = 'https://api.sheetbest.com/sheets/69580d8a-8ac2-413d-9b67-22bc2506e85e';
 
+<script>
+const DOCTORS_API = 'https://script.google.com/macros/s/AKfycbwQMMzmV96oKhiKuCWioFHi7XacyB-3g7cGWg2ifWuSfL2fgRqfehkskCKdcEqRTaH_SQ/exec';
 let doctors = [];
 let ratings = [];
 
-// تحميل بيانات الأطباء فقط (إلغاء تحميل وتحديث التقييمات)
 async function loadData() {
   try {
-    const doctorsRes = await fetch(DOCTORS_API);
+    const doctorsRes = await fetch(`${DOCTORS_API}?action=getSheetData`);
     doctors = await doctorsRes.json();
-
     displayDoctors();
   } catch(err) {
     console.error('خطأ في جلب البيانات:', err);
+    document.getElementById('doctorList').innerHTML = '<p style="color:red; text-align:center;">حدث خطأ أثناء جلب البيانات. يرجى التأكد من أن رابط السكربت صحيح.</p>';
   }
 }
 
-// عرض الأطباء بدون تقييمات
 function displayDoctors() {
   const container = document.getElementById('doctorList');
   container.innerHTML = '';
-
   const today = new Date().toISOString().split('T')[0];
   const filteredDoctors = doctors.filter(doc => !doc.hide_date || doc.hide_date > today);
 
@@ -190,7 +187,6 @@ function displayDoctors() {
   });
 }
 
-// فلترة الأطباء حسب البحث
 function filterDoctors() {
   const keyword = normalize(document.getElementById('search').value);
   const cards = document.querySelectorAll('.card');
@@ -215,6 +211,7 @@ function normalize(text) {
 
 loadData();
 </script>
+
 
 </body>
 </html>
