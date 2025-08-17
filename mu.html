@@ -150,59 +150,80 @@
 
   <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
 
-  <script>
-    const API_URL = 'https://api.sheetbest.com/sheets/d6a43902-2f66-4787-9439-a99c8d9de586';
-    let labs = [];
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQMMzmV96oKhiKuCWioFHi7XacyB-3g7cGWg2ifWuSfL2fgRqfehkskCKdcEqRTaH_SQ/exec';
+    let labs = [];
 
-    async function loadLabs() {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      const today = new Date().toISOString().split('T')[0];
-      labs = data.filter(lab => !lab.hide_date || lab.hide_date > today);
-      displayLabs();
-    }
+    async function loadLabs() {
+      try {
+        const res = await fetch(`${SCRIPT_URL}?action=getSheetData`);
+        const data = await res.json();
+        const today = new Date().toISOString().split('T')[0];
+        labs = data.filter(lab =>
+          lab.specialty && lab.specialty.includes("المختبرات") &&
+          (!lab.hide_date || lab.hide_date > today)
+        );
+        displayLabs();
+      } catch (error) {
+        console.error('Error fetching labs data:', error);
+        document.getElementById('labList').innerHTML = '<p style="color:red; text-align:center;">حدث خطأ أثناء جلب البيانات. يرجى التأكد من أن رابط السكربت صحيح.</p>';
+      }
+    }
 
-    function displayLabs() {
-      const container = document.getElementById('labList');
-      container.innerHTML = '';
+    function displayLabs() {
+      const container = document.getElementById('labList');
+      container.innerHTML = '';
+      
+      [...labs].reverse().forEach(lab => {
+        const phone = (lab.phone || '').replace(/^'/, '').replace(/'$/, '');
+        const name = lab.name?.trim();
+        const address = lab.address?.trim();
+        const holiday = lab.holiday?.trim();
+        const notes = lab.notes?.trim();
 
-      labs.forEach(lab => {
-        const phone = (lab.phone || '').replace(/^'/, '').replace(/'$/, '');
-        const name = lab.name?.trim();
-        const address = lab.address?.trim();
-        const holiday = lab.holiday?.trim();
-        const notes = lab.notes?.trim();
+        const card = document.createElement('div');
+        card.className = 'card';
 
-        const card = document.createElement('div');
-        card.className = 'card';
+        let content = '';
 
-        let content = '';
-
-        if (name) content += `<div class="field">🏷️ <strong>اسم المختبر:</strong> <span class="lab-name">${name}</span></div>`;
-        if (address) content += `<div class="field">📍 <strong>العنوان:</strong> ${address}</div>`;
-        if (phone) content += `<div class="field">📞 <strong>الهاتف:</strong> ${phone}</div>`;
-        if (holiday) content += `<div class="field">❌ <strong>أيام العطلة:</strong> ${holiday}</div>`;
-        if (notes) content += `<div class="field">📝 <strong>ملاحظات:</strong> ${notes}</div>`;
+        if (name) content += `<div class="field">🏷️ <strong>اسم المختبر:</strong> <span class="lab-name">${name}</span></div>`;
+        if (address) content += `<div class="field">📍 <strong>العنوان:</strong> ${address}</div>`;
+        if (phone) content += `<div class="field">📞 <strong>الهاتف:</strong> ${phone}</div>`;
+        if (holiday) content += `<div class="field">❌ <strong>أيام العطلة:</strong> ${holiday}</div>`;
+        if (notes) content += `<div class="field">📝 <strong>ملاحظات:</strong> ${notes}</div>`;
         if (phone) content += `<a href="tel:${phone}" class="call-btn">📞 اتصل الآن</a>`;
 
-        if (content) {
-          card.innerHTML = content;
-          container.appendChild(card);
-        }
-      });
-    }
+        if (content) {
+          card.innerHTML = content;
+          container.appendChild(card);
+        }
+      });
+    }
 
-    function filterLabs() {
-      const keyword = document.getElementById('search').value.toLowerCase();
-      const cards = document.querySelectorAll('.card');
+    function filterLabs() {
+      const keyword = normalize(document.getElementById('search').value);
+      const cards = document.querySelectorAll('.card');
 
-      cards.forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
-      });
-    }
+      cards.forEach(card => {
+        const cardText = normalize(card.innerText);
+        card.style.display = cardText.includes(keyword) ? 'block' : 'none';
+      });
+    }
 
-    loadLabs();
-  </script>
+    function normalize(text) {
+      return text
+        .toLowerCase()
+        .replace(/[أإآا]/g, 'ا')
+        .replace(/ى/g, 'ي')
+        .replace(/ؤ/g, 'و')
+        .replace(/ئ/g, 'ي')
+        .replace(/ة/g, 'ه')
+        .replace(/[\u064B-\u065F]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
 
+    loadLabs();
+  </script>
 </body>
 </html>
