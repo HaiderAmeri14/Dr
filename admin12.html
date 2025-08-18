@@ -121,7 +121,6 @@
     <div id="doctorCards" class="cards-container"></div>
 
     <script>
-        // الصق رابط النشر هنا
         const API_URL = 'https://script.google.com/macros/s/AKfycbz2GXZJjYA6SBqVrl63wEEMZuE6Y71OFXWq6O1oljv9CMzw1IdM2sNAuy3YWPmxhQPl/exec';
         let doctors = [];
 
@@ -186,7 +185,16 @@
             document.getElementById('address').value = doc.address;
             document.getElementById('phone').value = doc.phone;
             document.getElementById('holiday').value = doc.holiday;
-            document.getElementById('hide_date').value = doc.hide_date;
+            
+            // تعديل هذا السطر لتنسيق التاريخ
+            if (doc.hide_date) {
+                const date = new Date(doc.hide_date);
+                const formattedDate = date.toISOString().split('T')[0];
+                document.getElementById('hide_date').value = formattedDate;
+            } else {
+                document.getElementById('hide_date').value = '';
+            }
+            
             document.getElementById('map').value = doc.map || '';
             document.getElementById('notes').value = doc.notes || '';
             document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
