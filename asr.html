@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>دليل أطباء الأسرة و المجتمع</title>
+  <title>دليل أطباء الأسرة والمجتمع</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -150,25 +150,25 @@
     <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" title="العودة إلى الصفحة الرئيسية">🏠</a>
   </div>
 
-  <h1>أطباء الأسرة و المجتمع</h1>
+  <h1>أطباء الأسرة والمجتمع</h1>
   <input type="text" id="search" placeholder="🔍 ابحث عن طبيب أو تخصص..." onkeyup="filterDoctors()" />
 
   <div id="doctorList"></div>
 
   <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
-  <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2GXZJjYA6SBqVrl63wEEMZuE6Y71OFXWq6O1oljv9CMzw1IdM2sNAuy3YWPmxhQPl/exec';
+
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQMMzmV96oKhiKuCWioFHi7XacyB-3g7cGWg2ifWuSfL2fgRqfehkskCKdcEqRTaH_SQ/exec';
     
     let doctors = [];
 
     async function loadDoctors() {
       try {
-        const res = await fetch(`${SCRIPT_URL}?action=list`);
+        const res = await fetch(`${SCRIPT_URL}?action=getSheetData`);
         const data = await res.json();
-        
         const today = new Date().toISOString().split('T')[0];
 
-        doctors = data.data.filter(doc =>
+        doctors = data.filter(doc =>
           (!doc.hide_date || doc.hide_date > today) &&
           doc.specialty && doc.specialty.includes("الأسرة و المجتمع")
         );
@@ -247,6 +247,8 @@
 
     loadDoctors();
   </script>
+
+
 
 </body>
 </html>
