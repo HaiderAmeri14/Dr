@@ -156,18 +156,19 @@
   <div id="doctorList"></div>
 
   <div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
-  <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQMMzmV96oKhiKuCWioFHi7XacyB-3g7cGWg2ifWuSfL2fgRqfehkskCKdcEqRTaH_SQ/exec';
+  <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2GXZJjYA6SBqVrl63wEEMZuE6Y71OFXWq6O1oljv9CMzw1IdM2sNAuy3YWPmxhQPl/exec';
     
     let doctors = [];
 
     async function loadDoctors() {
       try {
-        const res = await fetch(`${SCRIPT_URL}?action=getSheetData`);
+        const res = await fetch(`${SCRIPT_URL}?action=list`);
         const data = await res.json();
+        
         const today = new Date().toISOString().split('T')[0];
 
-        doctors = data.filter(doc =>
+        doctors = data.data.filter(doc =>
           (!doc.hide_date || doc.hide_date > today) &&
           doc.specialty && doc.specialty.includes("الأسرة و المجتمع")
         );
