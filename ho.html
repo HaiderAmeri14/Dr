@@ -1,30 +1,85 @@
+
+Skip to content
+Navigation Menu
+
+    Pricing
+
+Sign in
+Sign up
+HaiderAmeri14 /
+Dr
+Public
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+
+    Insights
+
+Files
+
+LICENSE
+README.md
+admin12.html
+an.html
+asf.html
+ash.html
+asr.html
+awr.html
+bat.html
+bol.html
+ch.html
+dr.html
+eda.html
+elag.html
+eun.html
+fsl.html
+gel.html
+gmla.html
+gra.html
+har.html
+ho.html
+ho1.html
+index.html
+mu.html
+nes.html
+nf.html
+offline.html
+sw.js
+tagd.html
+tak.html
+te.html
+tee.html
+teeth.html
+
+    tgm.html
+
+    Dr
+
+/ho.html
+HaiderAmeri14
+HaiderAmeri14
+ho.html
+63e5ed8
+ · 
+Jul 24, 2025
+
+    Dr
+
+/ho.html
+
+287 lines (252 loc) · 6.75 KB
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>دليل كربلاء</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>دليلك الشامل</title>
   <style>
-    :root {
-      --primary-color: #0081a7;
-      --primary-light: #2a9d8f;
-      --secondary-color: #f77f00;
-      --background-color: #f0f4f8;
-      --card-bg: #ffffff;
-      --text-dark: #2c3e50;
-      --text-light: #7f8c8d;
-      --shadow-color: rgba(44, 62, 80, 0.1);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
 
     * {
       box-sizing: border-box;
@@ -34,355 +89,274 @@
 
     body {
       font-family: 'Tajawal', sans-serif;
-      background: var(--background-color);
-      color: var(--text-dark);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+      color: #333;
     }
 
     a {
       text-decoration: none;
-      color: inherit;
     }
 
-    /* Header */
-    .header {
-      background: var(--primary-color);
-      color: #fff;
+    .title {
       text-align: center;
-      padding: 24px 20px;
-      font-size: 1.8em;
-      font-weight: 800;
-      box-shadow: 0 4px 15px var(--shadow-color);
-      position: sticky;
-      top: 0;
-      z-index: 500;
+      font-size: 2em;
+      margin: 30px 0 10px;
+      color: #0077b6;
+      font-weight: 700;
     }
 
-    .main-content {
-      flex: 1;
-      padding-bottom: 90px;
-    }
-
-    /* Cards Grid */
-    .grid-container {
+    .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 20px;
       padding: 20px;
-      max-width: 900px;
+      max-width: 800px;
       margin: auto;
     }
 
-    /* Special grid for the health guide card */
-    .special-grid {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 25px 15px;
+    .icon-box {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 10px;
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 150px;
-      position: relative;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+    .icon-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     }
 
-    .card-icon {
-      width: 70px;
-      height: 70px;
+    .icon-circle {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: var(--background-color);
+      background: #b2ebf2;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2em;
-      color: var(--primary-color);
-      margin-bottom: 12px;
-      transition: all 0.3s ease;
+      font-size: 1.8em;
+      margin: auto;
+      color: #0077b6;
     }
 
-    .card:hover .card-icon {
-      background: var(--primary-color);
-      color: var(--card-bg);
+    .label {
+      margin-top: 10px;
+      font-size: 1em;
+      font-weight: 600;
+      color: #222;
     }
 
-    .card-label {
-      font-size: 1.1em;
-      font-weight: 700;
-      color: var(--text-dark);
-      transition: color 0.3s ease;
-    }
-    
-    .card:hover .card-label {
-        color: var(--primary-light);
+    .special {
+      background: linear-gradient(135deg, #00bcd4, #2196f3);
+      color: white;
     }
 
-    /* Special Card (Health Guide) */
-    .card.special {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: #fff;
+    .special .icon-circle {
+      background: white;
+      color: #0077b6;
     }
 
-    .card.special .card-icon {
-      background: #fff;
-      color: var(--primary-color);
-    }
-
-    .card.special:hover .card-icon {
-      background: var(--background-color);
-      color: var(--primary-light);
-    }
-
-    .card.special .card-label {
-        color: #fff;
-    }
-
-    /* Separator */
-    .section-divider {
-      height: 1px;
-      background: #e0e6ed;
-      width: 90%;
+    .separator {
+      height: 2px;
+      background: #ddd;
       margin: 30px auto;
+      width: 80%;
+      border-radius: 1px;
     }
 
-    /* Footer / Social Section */
-    .social-section {
-        text-align: center;
-        padding: 20px;
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
+      font-size: 0.9em;
     }
 
-    .social-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        background: #e9ecef;
-        padding: 12px 24px;
-        border-radius: 14px;
-        color: var(--text-dark);
-        font-weight: 500;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    .whatsapp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+      font-size: 1em;
+      color: #075e54;
+      font-weight: bold;
     }
 
-    .social-link:hover {
-        background: #dee2e6;
+    .whatsapp a {
+      text-decoration: none;
+      color: #075e54;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #e0f2f1;
+      padding: 10px 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    .social-link i {
-        color: #3b5998;
-        font-size: 1.2em;
+    .whatsapp a:hover {
+      background: #b2dfdb;
     }
-    
-    /* Visitor Counter */
-    .visitor-counter {
-        text-align: center;
-        margin-top: 20px;
+
+    @media (max-width: 480px) {
+      .icon-circle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5em;
+      }
+
+      .label {
         font-size: 0.9em;
-        color: var(--text-light);
+      }
+
+      .title {
+        font-size: 1.5em;
+      }
     }
 
-    /* Modal */
+    /* نافذة منبثقة */
     .modal {
       display: none;
       position: fixed;
       z-index: 1000;
+      padding-top: 100px;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(5px);
-      animation: fadeIn 0.3s forwards;
+      background-color: rgba(0,0,0,0.5);
     }
 
     .modal-content {
-      background-color: var(--card-bg);
-      margin: 20% auto;
-      padding: 40px 30px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 450px;
+      background-color: #fff;
+      margin: auto;
+      padding: 30px 20px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 400px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-      font-size: 1.3em;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      font-size: 1.2em;
       font-weight: bold;
-      color: var(--primary-color);
-      position: relative;
-      animation: slideIn 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+      color: #0077b6;
     }
 
-    .close-btn {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 2.5em;
-      color: var(--text-light);
+    .close {
+      color: #aaa;
+      float: left;
+      font-size: 28px;
+      font-weight: bold;
+      margin-right: -10px;
+      margin-top: -10px;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
       cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .close-btn:hover {
-      color: var(--text-dark);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideIn {
-      from { transform: translateY(-50px) scale(0.9); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-      .header {
-        font-size: 1.4em;
-        padding: 20px 15px;
-      }
-      .grid-container {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 15px;
-        padding: 15px;
-      }
-      .card-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8em;
-      }
-      .card-label {
-        font-size: 1em;
-      }
     }
   </style>
 </head>
 <body>
 
-  <header class="header">
-    دليلك الشامل في محافظة كربلاء
-  </header>
+  <h1 class="title">دليلك الشامل في محافظة كربلاء</h1>
 
-  <main class="main-content">
-    
-    <div class="special-grid">
-      <a class="card special" href="https://haiderameri14.github.io/Dr/ho1.html">
-        <div class="card-icon">
-          <i class="fa-solid fa-kit-medical"></i>
-        </div>
-        <div class="card-label">الدليل الصحي</div>
-      </a>
+  <!-- أيقونة الدليل الصحي -->
+  <div class="container">
+    <a class="icon-box special" href="https://haiderameri14.github.io/Dr/ho1.html">
+      <div class="icon-circle">🏥</div>
+      <div class="label">الدليل الصحي</div>
+    </a>
+  </div>
+
+  <div class="separator"></div>
+
+  <!-- بقية الأيقونات -->
+  <div class="container">
+    <div class="icon-box" onclick="showModal()">
+      <div class="icon-circle">🛒</div>
+      <div class="label">أسواق</div>
     </div>
-
-    <div class="section-divider"></div>
-
-    <div class="grid-container">
-      <div class="card" onclick="showModal()">
-        <div class="card-icon">
-          <i class="fa-solid fa-cart-shopping"></i>
-        </div>
-        <div class="card-label">أسواق</div>
-      </div>
-      
-      <div class="card" onclick="showModal()">
-        <div class="card-icon">
-          <i class="fa-solid fa-utensils"></i>
-        </div>
-        <div class="card-label">مطاعم</div>
-      </div>
-      
-      <div class="card" onclick="showModal()">
-        <div class="card-icon">
-          <i class="fa-solid fa-wrench"></i>
-        </div>
-        <div class="card-label">أعمال حرفية</div>
-      </div>
-      
-      <div class="card" onclick="showModal()">
-        <div class="card-icon">
-          <i class="fa-solid fa-school"></i>
-        </div>
-        <div class="card-label">مدارس</div>
-      </div>
-      
-      <div class="card" onclick="showModal()">
-        <div class="card-icon">
-          <i class="fa-solid fa-hotel"></i>
-        </div>
-        <div class="card-label">فنادق ومقاهي</div>
-      </div>
-
+    <div class="icon-box" onclick="showModal()">
+      <div class="icon-circle">🍽️</div>
+      <div class="label">مطاعم</div>
     </div>
-
-    <div class="section-divider"></div>
-
-    <section class="social-section">
-      <a href="https://www.facebook.com/share/15vN4EsGHe/" target="_blank" class="social-link">
-          <i class="fa-brands fa-facebook"></i>
-          <span>تابع صفحتنا على فيسبوك</span>
-      </a>
-    </section>
-    
-    <div class="visitor-counter">
-      <p>
-        <img
-          src="https://hitwebcounter.com/counter/counter.php?page=21231088&style=0010&nbdigits=6&type=page&initCount=0"
-          alt="عداد الزوار"
-          style="vertical-align: middle; margin-right: 8px; border: none; height: 20px;"
-        />
-        عدد الزوار الإجمالي
-      </p>
-      
-      <p style="margin-top: 20px; font-weight: 500;">
-        تصميم وبرمجة: <strong>حيدر العامري</strong>
-      </p>
+    <div class="icon-box" onclick="showModal()">
+      <div class="icon-circle">🛠️</div>
+      <div class="label">أعمال حرفية</div>
     </div>
-  </main>
-  
+    <div class="icon-box" onclick="showModal()">
+      <div class="icon-circle">🏫</div>
+      <div class="label">مدارس</div>
+    </div>
+  </div>
+
+  <!-- فيسبوك -->
+  <div class="whatsapp">
+    <a href="https://www.facebook.com/share/15vN4EsGHe/" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 320 512" fill="#075e54">
+        <path d="M279.1 288l14.2-92.7h-88.9V127.1c0-25.4 12.4-50.1 52.2-50.1h40.4V6.3S293.7 0 261.5 0C179.4 0 135.8 54.5 135.8 154.3V195.3H48v92.7h87.8V512h107.2V288z"/>
+      </svg>
+      <span style="text-align: center;">يمكنكم التواصل معنا عبر صفحتنا في الفيس بوك</span>
+    </a>
+  </div>
+
+  <!-- الزوار -->
+  <div style="text-align: center; margin-top: 30px;">
+    <div style="
+      display: inline-block;
+      background: linear-gradient(135deg, #00bcd4, #2196f3);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-size: 1.1em;
+      font-weight: bold;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      font-family: 'Tajawal', sans-serif;
+    ">
+      👁️ عدد الزوار:
+      <img src="https://hitwebcounter.com/counter/counter.php?page=21231088&style=0010&nbdigits=6&type=page&initCount=0"
+           title="عدد الزوار"
+           alt="Visit counter"
+           style="vertical-align: middle; margin-right: 8px; border: none; height: 24px;" />
+    </div>
+  </div>
+
+  <!-- التوقيع -->
+  <div class="footer">
+    تصميم وبرمجة: <strong>حيدر العامري</strong>
+  </div>
+
+  <!-- النافذة المنبثقة -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <p>قريباً ستُضاف هذه الخدمة<br />مع تحيات فريق العمل</p>
+      <span class="close" onclick="closeModal()">&times;</span>
+      قريباً ستُضاف هذه الخدمة<br>مع تحيات فريق العمل
     </div>
   </div>
 
   <script>
     function showModal() {
-      document.getElementById("myModal").style.display = "flex";
+      document.getElementById("myModal").style.display = "block";
     }
 
     function closeModal() {
       document.getElementById("myModal").style.display = "none";
     }
 
-    window.onclick = function (event) {
+    window.onclick = function(event) {
       const modal = document.getElementById("myModal");
       if (event.target == modal) {
         modal.style.display = "none";
       }
-    };
+    }
   </script>
 
 </body>
 </html>
+Dr/ho.html at main · HaiderAmeri14/Dr · GitHub
