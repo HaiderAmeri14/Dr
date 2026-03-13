@@ -1,137 +1,293 @@
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>الدليل الطبي الشامل</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدليل الطبي - كربلاء</title>
+    <!-- خط Cairo الحديث -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0072ff;
+            --bg: #f4f7fa;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-sub: #64748b;
+            --radius: 18px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body {
-      font-family: 'Cairo', sans-serif;
-      background: #f1f6fb;
-      color: #333;
-    }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            max-width: 480px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
 
-    .marquee {
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      color: white;
-      padding: 15px 0;
-      font-size: 1.3em;
-      font-weight: bold;
-      text-align: center;
-      overflow: hidden;
-      position: relative;
-    }
+        /* شريط التنبيه العلوي المحدث */
+        .info-banner {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.2);
+            margin-bottom: 20px;
+        }
 
-    .marquee div {
-      display: inline-block;
-      white-space: nowrap;
-      animation: scroll 12s linear infinite;
-    }
+        /* هيدر الصفحة */
+        header {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-    @keyframes scroll {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
+        header h1 {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
-      padding: 30px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+        .back-btn {
+            width: 40px; height: 40px;
+            background: var(--surface);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            box-shadow: var(--shadow);
+            text-decoration: none;
+        }
 
-    .icon-box {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 20px 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      text-decoration: none;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        /* شبكة التخصصات (4 أعمدة لتوزيع منطقي وكثافة مثالية) */
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 15px 15px;
+        }
 
-    .icon-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      background: #e6f7ff;
-    }
+        .spec-item {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
 
-    .icon-circle {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(to bottom right, #d0f1ff, #aee1ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8em;
-      margin-bottom: 10px;
-      color: #005c99;
-    }
+        .spec-item:active {
+            transform: scale(0.9);
+        }
 
-    .label {
-      font-size: 0.95em;
-      font-weight: 600;
-      color: #333;
-    }
+        .icon-box {
+            width: 62px;
+            height: 62px;
+            background: var(--surface);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--primary);
+            box-shadow: var(--shadow);
+            border: 1px solid #edf2f7;
+            transition: 0.3s;
+        }
 
-    @media (max-width: 480px) {
-      .icon-circle {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5em;
-      }
+        .spec-item:hover .icon-box {
+            background: var(--primary);
+            color: white;
+        }
 
-      .label {
-        font-size: 0.85em;
-      }
-    }
-  </style>
+        .spec-item span {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-align: center;
+            line-height: 1.2;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 28px; /* توحيد الارتفاع للنصوص */
+        }
+
+        /* لمسة جمالية للخلفية */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; right: 0; height: 200px;
+            background: radial-gradient(circle at top right, rgba(0,114,255,0.05), transparent);
+            z-index: -1;
+        }
+
+    </style>
 </head>
 <body>
 
-  <div class="marquee">
-    <div>عند دخولك الى احد الخيارات يرجى الانتظار لبضع ثواني لحين ظهور  النتائج </div>
-  </div>
+    <div class="bg-gradient"></div>
 
-  <div class="grid">
-    <a href="https://haiderameri14.github.io/Dr/dr.html" class="icon-box"><div class="icon-circle">👨‍⚕️</div><div class="label">كل الأطباء</div></a>
-    <a href="https://haiderameri14.github.io/Dr/an.html" class="icon-box"><div class="icon-circle">🦻</div><div class="label">الأنف والأذن والحنجرة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/te.html" class="icon-box"><div class="icon-circle">🦷</div><div class="label">أطباء الأسنان</div></a>
-    <a href="https://haiderameri14.github.io/Dr/har.html" class="icon-box"><div class="icon-circle">❤️</div><div class="label">أطباء القلبية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/ch.html" class="icon-box"><div class="icon-circle">👶</div><div class="label">أطباء الأطفال</div></a>
-    <a href="https://haiderameri14.github.io/Dr/bat.html" class="icon-box"><div class="icon-circle">🩺</div><div class="label">أطباء الباطنية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/nes.html" class="icon-box"><div class="icon-circle">🤰</div><div class="label">النسائية والتوليد</div></a>
-    <a href="https://haiderameri14.github.io/Dr/nf.html" class="icon-box"><div class="icon-circle">🧠</div><div class="label">الطب النفسي</div></a>
-    <a href="https://haiderameri14.github.io/Dr/gra.html" class="icon-box"><div class="icon-circle">🏥</div><div class="label">جراحة عامة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/gel.html" class="icon-box"><div class="icon-circle">🌞</div><div class="label">الجلدية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/gmla.html" class="icon-box"><div class="icon-circle">🧠</div><div class="label">الجملة العصبية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/eda.html" class="icon-box"><div class="icon-circle">🦴</div><div class="label">العظام والمفاصل</div></a>
-    <a href="https://haiderameri14.github.io/Dr/bol.html" class="icon-box"><div class="icon-circle">💦</div><div class="label">البولية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/eun.html" class="icon-box"><div class="icon-circle">👁️</div><div class="label">العيون</div></a>
-    <a href="https://haiderameri14.github.io/Dr/awr.html" class="icon-box"><div class="icon-circle">🎗️</div><div class="label">الأورام</div></a>
-    <a href="https://haiderameri14.github.io/Dr/tak.html" class="icon-box"><div class="icon-circle">💉</div><div class="label">التخدير</div></a>
-    <a href="https://haiderameri14.github.io/Dr/tgm.html" class="icon-box"><div class="icon-circle">💆‍♀️</div><div class="label">التجميلية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/asr.html" class="icon-box"><div class="icon-circle">👨‍👩‍👧‍👦</div><div class="label">طب الأسرة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/fsl.html" class="icon-box"><div class="icon-circle">⚙️</div><div class="label">الفسلجة</div></a>
-    <a href="https://haiderameri14.github.io/Dr/tagd.html" class="icon-box"><div class="icon-circle">🥗</div><div class="label">التغذية</div></a>
-    <a href="https://haiderameri14.github.io/Dr/elag.html" class="icon-box"><div class="icon-circle">🏃</div><div class="label">العلاج الطبيعي</div></a>
-    <a href="https://haiderameri14.github.io/Dr/ash.html" class="icon-box"><div class="icon-circle">🩻</div><div class="label">الأشعة التشخيصية</div></a>
-  </div>
+    <!-- شريط التنبيه العصري بدلاً من الـ Marquee -->
+    <div class="info-banner">
+        <i class="fa-solid fa-circle-info" style="margin-left: 5px;"></i>
+        يرجى الانتظار لبضع ثوانٍ لحين ظهور النتائج بعد اختيار القسم
+    </div>
+
+    <header>
+        <a href="javascript:history.back()" class="back-btn"><i class="fa-solid fa-chevron-right"></i></a>
+        <h1>تخصصات الأطباء</h1>
+        <div style="width: 40px;"></div>
+    </header>
+
+    <div class="specialties-grid">
+        <!-- كل الأطباء -->
+        <a href="https://haiderameri14.github.io/Dr/dr.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-user-md"></i></div>
+            <span>كل الأطباء</span>
+        </a>
+
+        <!-- الأنف والأذن والحنجرة -->
+        <a href="https://haiderameri14.github.io/Dr/an.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-ear-listen"></i></div>
+            <span>الأنف والأذن</span>
+        </a>
+
+        <!-- أطباء الأسنان -->
+        <a href="https://haiderameri14.github.io/Dr/te.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-tooth"></i></div>
+            <span>الأسنان</span>
+        </a>
+
+        <!-- أطباء القلبية -->
+        <a href="https://haiderameri14.github.io/Dr/har.html" class="spec-item">
+            <div class="icon-box" style="color: #ef4444;"><i class="fa-solid fa-heart-pulse"></i></div>
+            <span>القلبية</span>
+        </a>
+
+        <!-- أطباء الأطفال -->
+        <a href="https://haiderameri14.github.io/Dr/ch.html" class="spec-item">
+            <div class="icon-box" style="color: #f59e0b;"><i class="fa-solid fa-baby"></i></div>
+            <span>الأطفال</span>
+        </a>
+
+        <!-- أطباء الباطنية -->
+        <a href="https://haiderameri14.github.io/Dr/bat.html" class="spec-item">
+            <div class="icon-box" style="color: #10b981;"><i class="fa-solid fa-stethoscope"></i></div>
+            <span>الباطنية</span>
+        </a>
+
+        <!-- النسائية والتوليد -->
+        <a href="https://haiderameri14.github.io/Dr/nes.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-person-pregnant"></i></div>
+            <span>النسائية</span>
+        </a>
+
+        <!-- الطب النفسي -->
+        <a href="https://haiderameri14.github.io/Dr/nf.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+            <span>النفسية</span>
+        </a>
+
+        <!-- جراحة عامة -->
+        <a href="https://haiderameri14.github.io/Dr/gra.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-hospital"></i></div>
+            <span>جراحة عامة</span>
+        </a>
+
+        <!-- الجلدية -->
+        <a href="https://haiderameri14.github.io/Dr/gel.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-hand-dots"></i></div>
+            <span>الجلدية</span>
+        </a>
+
+        <!-- الجملة العصبية -->
+        <a href="https://haiderameri14.github.io/Dr/gmla.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-microchip"></i></div>
+            <span>جملة عصبية</span>
+        </a>
+
+        <!-- العظام والمفاصل -->
+        <a href="https://haiderameri14.github.io/Dr/eda.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-bone"></i></div>
+            <span>العظام</span>
+        </a>
+
+        <!-- البولية -->
+        <a href="https://haiderameri14.github.io/Dr/bol.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-droplet"></i></div>
+            <span>البولية</span>
+        </a>
+
+        <!-- العيون -->
+        <a href="https://haiderameri14.github.io/Dr/eun.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-eye"></i></div>
+            <span>العيون</span>
+        </a>
+
+        <!-- الأورام -->
+        <a href="https://haiderameri14.github.io/Dr/awr.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-ribbon"></i></div>
+            <span>الأورام</span>
+        </a>
+
+        <!-- التخدير -->
+        <a href="https://haiderameri14.github.io/Dr/tak.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-syringe"></i></div>
+            <span>التخدير</span>
+        </a>
+
+        <!-- التجميلية -->
+        <a href="https://haiderameri14.github.io/Dr/tgm.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-sparkles"></i></div>
+            <span>التجميل</span>
+        </a>
+
+        <!-- طب الأسرة -->
+        <a href="https://haiderameri14.github.io/Dr/asr.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-people-roof"></i></div>
+            <span>طب الأسرة</span>
+        </a>
+
+        <!-- الفسلجة -->
+        <a href="https://haiderameri14.github.io/Dr/fsl.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-gears"></i></div>
+            <span>الفسلجة</span>
+        </a>
+
+        <!-- التغذية -->
+        <a href="https://haiderameri14.github.io/Dr/tagd.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-apple-whole"></i></div>
+            <span>التغذية</span>
+        </a>
+
+        <!-- العلاج الطبيعي -->
+        <a href="https://haiderameri14.github.io/Dr/elag.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-person-running"></i></div>
+            <span>علاج طبيعي</span>
+        </a>
+
+        <!-- الأشعة التشخيصية -->
+        <a href="https://haiderameri14.github.io/Dr/ash.html" class="spec-item">
+            <div class="icon-box"><i class="fa-solid fa-x-ray"></i></div>
+            <span>الأشعة</span>
+        </a>
+    </div>
+
+    <footer style="text-align: center; margin-top: 30px; padding: 20px; font-size: 0.8rem; color: var(--text-sub);">
+        جميع الحقوق محفوظة - دليل كربلاء الطبي
+    </footer>
 
 </body>
 </html>
