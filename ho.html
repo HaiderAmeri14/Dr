@@ -1,287 +1,306 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>دليلك الشامل</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليلك الشامل - كربلاء</title>
+    <!-- خط Cairo الحديث -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --radius: 20px;
+            --shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
 
-    * {
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
-    }
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(to bottom, #e0f7fa, #ffffff);
-      color: #333;
-    }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            max-width: 480px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+            line-height: 1.6;
+        }
 
-    a {
-      text-decoration: none;
-    }
+        /* الهيدر العلوي */
+        header {
+            padding: 30px 20px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .title {
-      text-align: center;
-      font-size: 2em;
-      margin: 30px 0 10px;
-      color: #0077b6;
-      font-weight: 700;
-    }
+        .brand-box h1 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
+        .avatar {
+            width: 45px; height: 45px;
+            background: linear-gradient(135deg, var(--primary), #60a5fa);
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+        }
 
-    .icon-box {
-      background: white;
-      border-radius: 16px;
-      padding: 20px 10px;
-      text-align: center;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      cursor: pointer;
-    }
+        /* كارت "الدليل الصحي" المتميز */
+        .featured-link {
+            display: block;
+            margin: 15px 20px;
+            padding: 25px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: var(--radius);
+            color: white;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
 
-    .icon-box:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    }
+        .featured-link:active { transform: scale(0.97); }
 
-    .icon-circle {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #b2ebf2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8em;
-      margin: auto;
-      color: #0077b6;
-    }
+        .featured-link h2 { font-size: 1.3rem; margin-bottom: 5px; position: relative; z-index: 2; }
+        .featured-link p { font-size: 0.85rem; opacity: 0.8; position: relative; z-index: 2; }
+        
+        .featured-link i.bg-icon {
+            position: absolute;
+            left: -10px; bottom: -10px;
+            font-size: 5rem;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
 
-    .label {
-      margin-top: 10px;
-      font-size: 1em;
-      font-weight: 600;
-      color: #222;
-    }
+        /* شبكة الخدمات (4 أعمدة) */
+        .section-title {
+            padding: 25px 20px 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+        }
 
-    .special {
-      background: linear-gradient(135deg, #00bcd4, #2196f3);
-      color: white;
-    }
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 0 20px;
+        }
 
-    .special .icon-circle {
-      background: white;
-      color: #0077b6;
-    }
+        .service-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
 
-    .separator {
-      height: 2px;
-      background: #ddd;
-      margin: 30px auto;
-      width: 80%;
-      border-radius: 1px;
-    }
+        .icon-wrap {
+            width: 65px; height: 65px;
+            background: var(--surface);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            transition: 0.3s;
+        }
 
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      color: #555;
-      font-size: 0.9em;
-    }
+        .service-card:hover .icon-wrap {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
 
-    .whatsapp {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 25px;
-      font-size: 1em;
-      color: #075e54;
-      font-weight: bold;
-    }
+        .service-card span {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
 
-    .whatsapp a {
-      text-decoration: none;
-      color: #075e54;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: #e0f2f1;
-      padding: 10px 18px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+        /* قسم التواصل الاجتماعي */
+        .social-card {
+            margin: 30px 20px;
+            background: #f0fdf4;
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px dashed #bbf7d0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
 
-    .whatsapp a:hover {
-      background: #b2dfdb;
-    }
+        .social-card i { font-size: 1.8rem; color: #16a34a; }
+        .social-card p { font-size: 0.85rem; color: #166534; font-weight: 600; }
 
-    @media (max-width: 480px) {
-      .icon-circle {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5em;
-      }
+        /* عداد الزوار بتصميم عصري */
+        .stats-box {
+            margin: 20px;
+            background: var(--surface);
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 700;
+            box-shadow: var(--shadow);
+        }
 
-      .label {
-        font-size: 0.9em;
-      }
+        /* التوقيع */
+        .footer-copy {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
 
-      .title {
-        font-size: 1.5em;
-      }
-    }
+        /* المودال (النافذة المنبثقة) بستايل جديد */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            display: none; align-items: center; justify-content: center;
+        }
 
-    /* نافذة منبثقة */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      padding-top: 100px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.5);
-    }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+        }
 
-    .modal-content {
-      background-color: #fff;
-      margin: auto;
-      padding: 30px 20px;
-      border-radius: 12px;
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #0077b6;
-    }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-    .close {
-      color: #aaa;
-      float: left;
-      font-size: 28px;
-      font-weight: bold;
-      margin-right: -10px;
-      margin-top: -10px;
-    }
+        .modal-content i { font-size: 3rem; color: var(--primary); margin-bottom: 15px; }
+        .modal-content h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .close-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+        }
 
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  </style>
+    </style>
 </head>
 <body>
 
-  <h1 class="title">دليلك الشامل في محافظة كربلاء</h1>
+    <header>
+        <div class="brand-box">
+            <p style="font-size: 0.75rem; color: var(--text-sub);">محافظة كربلاء المقدسة</p>
+            <h1>دليلك الشامل</h1>
+        </div>
+        <div class="avatar">K</div>
+    </header>
 
-  <!-- أيقونة الدليل الصحي -->
-  <div class="container">
-    <a class="icon-box special" href="https://haiderameri14.github.io/Dr/ho1.html">
-      <div class="icon-circle">🏥</div>
-      <div class="label">الدليل الصحي</div>
+    <!-- الدليل الصحي - الرابط الأساسي -->
+    <a href="https://haiderameri14.github.io/Dr/ho1.html" class="featured-link">
+        <i class="fa-solid fa-hospital-user bg-icon"></i>
+        <h2>الدليل الصحي</h2>
+        <p>ابحث عن الأطباء والعيادات التخصصية في كربلاء</p>
     </a>
-  </div>
 
-  <div class="separator"></div>
+    <h3 class="section-title">الخدمات القادمة</h3>
 
-  <!-- بقية الأيقونات -->
-  <div class="container">
-    <div class="icon-box" onclick="showModal()">
-      <div class="icon-circle">🛒</div>
-      <div class="label">أسواق</div>
+    <div class="grid-services">
+        <!-- أسواق -->
+        <div class="service-card" onclick="showModal()">
+            <div class="icon-wrap"><i class="fa-solid fa-cart-shopping"></i></div>
+            <span>أسواق</span>
+        </div>
+        <!-- مطاعم -->
+        <div class="service-card" onclick="showModal()">
+            <div class="icon-wrap"><i class="fa-solid fa-utensils"></i></div>
+            <span>مطاعم</span>
+        </div>
+        <!-- أعمال حرفية -->
+        <div class="service-card" onclick="showModal()">
+            <div class="icon-wrap"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <span>حرفية</span>
+        </div>
+        <!-- مدارس -->
+        <div class="service-card" onclick="showModal()">
+            <div class="icon-wrap"><i class="fa-solid fa-school"></i></div>
+            <span>مدارس</span>
+        </div>
     </div>
-    <div class="icon-box" onclick="showModal()">
-      <div class="icon-circle">🍽️</div>
-      <div class="label">مطاعم</div>
-    </div>
-    <div class="icon-box" onclick="showModal()">
-      <div class="icon-circle">🛠️</div>
-      <div class="label">أعمال حرفية</div>
-    </div>
-    <div class="icon-box" onclick="showModal()">
-      <div class="icon-circle">🏫</div>
-      <div class="label">مدارس</div>
-    </div>
-  </div>
 
-  <!-- فيسبوك -->
-  <div class="whatsapp">
-    <a href="https://www.facebook.com/share/15vN4EsGHe/" target="_blank">
-      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 320 512" fill="#075e54">
-        <path d="M279.1 288l14.2-92.7h-88.9V127.1c0-25.4 12.4-50.1 52.2-50.1h40.4V6.3S293.7 0 261.5 0C179.4 0 135.8 54.5 135.8 154.3V195.3H48v92.7h87.8V512h107.2V288z"/>
-      </svg>
-      <span style="text-align: center;">يمكنكم التواصل معنا عبر صفحتنا في الفيس بوك</span>
+    <!-- رابط فيسبوك -->
+    <a href="https://www.facebook.com/share/15vN4EsGHe/" target="_blank" class="social-card">
+        <i class="fa-brands fa-facebook"></i>
+        <p>تواصل معنا عبر صفحتنا الرسمية على الفيسبوك</p>
     </a>
-  </div>
 
-  <!-- الزوار -->
-  <div style="text-align: center; margin-top: 30px;">
-    <div style="
-      display: inline-block;
-      background: linear-gradient(135deg, #00bcd4, #2196f3);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 14px;
-      font-size: 1.1em;
-      font-weight: bold;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      font-family: 'Tajawal', sans-serif;
-    ">
-      👁️ عدد الزوار:
-      <img src="https://hitwebcounter.com/counter/counter.php?page=21231088&style=0010&nbdigits=6&type=page&initCount=0"
-           title="عدد الزوار"
-           alt="Visit counter"
-           style="vertical-align: middle; margin-right: 8px; border: none; height: 24px;" />
+    <!-- عداد الزوار -->
+    <div class="stats-box">
+        <i class="fa-regular fa-eye" style="color: var(--primary);"></i>
+        <span>عدد الزوار:</span>
+        <img src="https://hitwebcounter.com/counter/counter.php?page=21231088&style=0010&nbdigits=6&type=page&initCount=0" alt="counter">
     </div>
-  </div>
 
-  <!-- التوقيع -->
-  <div class="footer">
-    تصميم وبرمجة: <strong>حيدر العامري</strong>
-  </div>
-
-  <!-- النافذة المنبثقة -->
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      قريباً ستُضاف هذه الخدمة<br>مع تحيات فريق العمل
+    <!-- التوقيع السفلي -->
+    <div class="footer-copy">
+        تصميم وبرمجة: <strong>حيدر العامري</strong>
     </div>
-  </div>
 
-  <script>
-    function showModal() {
-      document.getElementById("myModal").style.display = "block";
-    }
+    <!-- النافذة المنبثقة -->
+    <div id="myModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <h3>قريباً جداً</h3>
+            <p style="color: var(--text-sub); font-size: 0.9rem;">هذه الخدمة قيد الإنشاء حالياً وستُطلق قريباً مع تحيات فريق العمل</p>
+            <button class="close-btn" onclick="closeModal()">حسناً</button>
+        </div>
+    </div>
 
-    function closeModal() {
-      document.getElementById("myModal").style.display = "none";
-    }
+    <script>
+        function showModal() {
+            document.getElementById("myModal").style.display = "flex";
+        }
 
-    window.onclick = function(event) {
-      const modal = document.getElementById("myModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        // إغلاق عند الضغط خارج المربع
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 
 </body>
 </html>
