@@ -1,157 +1,224 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>دليل الأطباء </title>
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
-    margin: 0; padding: 0;
-    direction: rtl; text-align: center;
-  }
-  .top-banner {
-    background-color: #0077b6;
-    color: white;
-    font-size: 14px;
-    padding: 5px 0;
-    overflow: hidden;
-  }
-  .top-banner marquee {
-    font-weight: bold;
-  }
-  .nav-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-    perspective: 1000px;
-  }
-  .nav-button {
-    background: linear-gradient(145deg, #00b4d8, #0077b6);
-    border-radius: 12px;
-    box-shadow: 3px 3px 6px #005f87, -3px -3px 6px #00d1ff;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 10px;
-    text-decoration: none;
-    display: inline-block;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .nav-button:hover {
-    transform: rotateX(10deg) rotateY(10deg) scale(1.05);
-    box-shadow: 6px 6px 10px #004a67, -6px -6px 10px #00f0ff;
-    cursor: pointer;
-  }
-  h1 {
-    margin: 10px 0 20px;
-    color: #023e8a;
-    font-size: 22px;
-  }
-  #search {
-    width: 90%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
-  .card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    margin: 20px auto;
-    padding: 20px;
-    max-width: 500px;
-    text-align: right;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    transform-style: preserve-3d;
-  }
-  .card:hover {
-    transform: rotateY(3deg) scale(1.02);
-    box-shadow: 0 20px 30px rgba(0,0,0,0.25);
-  }
-  .field {
-    margin-bottom: 12px;
-    font-size: 17px;
-    line-height: 1.6;
-  }
-  .field strong {
-    color: #0077b6;
-  }
-  .field.name-field {
-    font-weight: bold;
-    color: #d6336c;
-    font-size: 18px;
-  }
-  .btn-group {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  .call-btn,
-  .map-btn {
-    display: inline-block;
-    padding: 10px 18px;
-    background-color: #00b4d8;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 22px;
-    transition: background 0.3s;
-    user-select: none;
-  }
-  .call-btn:hover,
-  .map-btn:hover {
-    background-color: #0096c7;
-  }
-  .footer {
-    margin-top: 40px;
-    padding: 10px;
-    font-size: 14px;
-    color: #555;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الأطباء - نتائج البحث</title>
+    <!-- خط Cairo الحديث -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --accent: #d6336c;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-sub: #64748b;
+            --radius: 20px;
+        }
 
-  /* تأثير التلاشي لعبارة الانتظار */
-  #loading {
-    transition: opacity 2s ease;
-  }
-</style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+        }
+
+        /* شريط علوي نحيف */
+        .top-nav {
+            background: #000;
+            color: white;
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* الهيدر الرئيسي */
+        header {
+            padding: 20px;
+            background: var(--surface);
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            width: 42px; height: 42px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .nav-btn:active { transform: scale(0.9); }
+
+        /* شريط البحث المودرن */
+        .search-wrapper {
+            position: relative;
+        }
+
+        #search {
+            width: 100%;
+            padding: 14px 45px 14px 15px;
+            border-radius: 15px;
+            border: 1.5px solid #e2e8f0;
+            background: #f8fafc;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        #search:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            right: 15px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+        }
+
+        /* رسالة الانتظار بشكل توب بار */
+        #loading {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin: 10px 20px;
+            border-radius: 12px;
+            transition: opacity 1.5s ease;
+        }
+
+        /* تصميم كارت الطبيب الجديد */
+        .doctor-card {
+            background: var(--surface);
+            margin: 15px 20px;
+            padding: 20px;
+            border-radius: 22px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f1f5f9;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .doctor-card:hover { transform: translateY(-3px); }
+
+        .doc-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
+        
+        .doc-avatar {
+            width: 55px; height: 55px;
+            background: #eff6ff;
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-size: 1.5rem;
+        }
+
+        .doc-info h3 { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-bottom: 2px; }
+        .doc-info .specialty { font-size: 0.85rem; font-weight: 700; color: var(--primary); }
+
+        .doc-details { border-top: 1px solid #f1f5f9; padding-top: 12px; }
+
+        .detail-item {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 8px; font-size: 0.85rem; color: var(--text-sub);
+        }
+
+        .detail-item i { width: 18px; color: var(--primary); }
+        .detail-item strong { color: var(--text-main); margin-left: 5px; }
+
+        /* أزرار الإجراءات السريعة */
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 14px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.3s;
+        }
+
+        .btn-call { background: var(--primary); color: white; }
+        .btn-map { background: #f1f5f9; color: var(--text-main); }
+
+        .action-btn:active { transform: scale(0.95); }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+    </style>
 </head>
 <body>
 
-<div class="top-banner">
-  <marquee direction="right">📱 تطبيق العيادات الطبية - البحث عن الطبيب بسهولة وسرعة</marquee>
-</div>
+    <div class="top-nav">
+        📱 تطبيق العيادات الطبية - البحث الذكي والسريع
+    </div>
 
-<div class="nav-buttons">
-  <a href="https://haiderameri14.github.io/Dr/ho1.html" class="nav-button" title="صفحة المستشفى">🏥</a>
-  <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-button" title="العودة إلى الصفحة الرئيسية">🏠</a>
-</div>
+    <header>
+        <div class="nav-row">
+            <a href="https://haiderameri14.github.io/Dr/ho1.html" class="nav-btn" title="المستشفى">🏥</a>
+            <h1 style="font-size: 1.2rem; font-weight: 800;">دليل الأطباء</h1>
+            <a href="https://haiderameri14.github.io/Dr/ho.html" class="nav-btn" title="الرئيسية">🏠</a>
+        </div>
 
-<h1>دليل الأطباء</h1>
+        <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="ابحث باسم الطبيب أو التخصص..." onkeyup="filterDoctors()" />
+        </div>
+    </header>
 
-<h1 id="loading">⏳ يرجى الانتظار بضع ثواني لحين ظهور النتائج</h1>
+    <div id="loading">
+        <i class="fa-solid fa-spinner fa-spin"></i> يرجى الانتظار ثوانٍ لجلب البيانات...
+    </div>
 
-<input type="text" id="search" placeholder="🔍 ابحث عن طبيب أو تخصص..." onkeyup="filterDoctors()" />
+    <div id="doctorList">
+        <!-- يتم توليد البيانات هنا بواسطة JS -->
+    </div>
 
-<div id="doctorList"></div>
-
-<div class="footer">برمجة وتصميم: <strong>حيدر العامري</strong> ©</div>
-
+    <div class="footer">
+        برمجة وتصميم: <strong>حيدر العامري</strong> © 2025
+    </div>
 
 <script>
 const DOCTORS_API = 'https://script.google.com/macros/s/AKfycbwQMMzmV96oKhiKuCWioFHi7XacyB-3g7cGWg2ifWuSfL2fgRqfehkskCKdcEqRTaH_SQ/exec';
 let doctors = [];
-let ratings = [];
 
 async function loadData() {
   try {
@@ -160,7 +227,7 @@ async function loadData() {
     displayDoctors();
   } catch(err) {
     console.error('خطأ في جلب البيانات:', err);
-    document.getElementById('doctorList').innerHTML = '<p style="color:red; text-align:center;">حدث خطأ أثناء جلب البيانات. يرجى التأكد من أن رابط السكربت صحيح.</p>';
+    document.getElementById('doctorList').innerHTML = '<p style="color:red; text-align:center; padding:20px;">حدث خطأ أثناء جلب البيانات. تأكد من اتصال الإنترنت.</p>';
   }
 }
 
@@ -174,29 +241,39 @@ function displayDoctors() {
     const phone = (doc.phone || '').replace(/^'/, '').replace(/'$/, '');
     const mapLink = doc.map || '';
 
-    let fieldsHTML = '';
-    if (doc.name) fieldsHTML += `<div class="field name-field">👨‍⚕️ <strong>الاسم:</strong> ${doc.name}</div>`;
-    if (doc.specialty) fieldsHTML += `<div class="field">🏥 <strong>التخصص:</strong> ${doc.specialty}</div>`;
-    if (doc.address) fieldsHTML += `<div class="field">📍 <strong>العنوان:</strong> ${doc.address}</div>`;
-    if (phone) fieldsHTML += `<div class="field">📞 <strong>الهاتف:</strong> ${phone}</div>`;
-    if (doc.holiday) fieldsHTML += `<div class="field">❌ <strong>أيام العطلة:</strong> ${doc.holiday}</div>`;
-    if (doc.notes) fieldsHTML += `<div class="field">📝 <strong>ملاحظات:</strong> ${doc.notes}</div>`;
+    let cardHTML = `
+      <div class="doctor-card">
+        <div class="doc-header">
+            <div class="doc-avatar"><i class="fa-solid fa-user-doctor"></i></div>
+            <div class="doc-info">
+                <h3>${doc.name || 'غير متوفر'}</h3>
+                <p class="specialty">${doc.specialty || 'تخصص عام'}</p>
+            </div>
+        </div>
+        
+        <div class="doc-details">
+            ${doc.address ? `<div class="detail-item"><i class="fa-solid fa-location-dot"></i> <span><strong>العنوان:</strong> ${doc.address}</span></div>` : ''}
+            ${phone ? `<div class="detail-item"><i class="fa-solid fa-phone"></i> <span><strong>الهاتف:</strong> ${phone}</span></div>` : ''}
+            ${doc.holiday ? `<div class="detail-item"><i class="fa-solid fa-calendar-xmark"></i> <span><strong>العطلة:</strong> ${doc.holiday}</span></div>` : ''}
+            ${doc.notes ? `<div class="detail-item"><i class="fa-solid fa-comment-medical"></i> <span><strong>ملاحظات:</strong> ${doc.notes}</span></div>` : ''}
+        </div>
 
-    let buttonsHTML = `<div class="btn-group">`;
-    if (phone) buttonsHTML += `<a href="tel:${phone}" class="call-btn" title="اتصل الآن">📞</a>`;
-    if (mapLink) buttonsHTML += `<a href="${mapLink}" class="map-btn" target="_blank" rel="noopener" title="عرض على الخريطة">🗺️</a>`;
-    buttonsHTML += `</div>`;
+        <div class="actions-row">
+            ${phone ? `<a href="tel:${phone}" class="action-btn btn-call"><i class="fa-solid fa-phone"></i> اتصال</a>` : ''}
+            ${mapLink ? `<a href="${mapLink}" class="action-btn btn-map" target="_blank"><i class="fa-solid fa-map-location-dot"></i> الخريطة</a>` : ''}
+        </div>
+      </div>
+    `;
 
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = fieldsHTML + buttonsHTML;
-    container.appendChild(card);
+    const cardElement = document.createElement('div');
+    cardElement.innerHTML = cardHTML;
+    container.appendChild(cardElement);
   });
 }
 
 function filterDoctors() {
   const keyword = normalize(document.getElementById('search').value);
-  const cards = document.querySelectorAll('.card');
+  const cards = document.querySelectorAll('.doctor-card');
   cards.forEach(card => {
     const cardText = normalize(card.innerText);
     card.style.display = cardText.includes(keyword) ? 'block' : 'none';
@@ -218,14 +295,15 @@ function normalize(text) {
 
 loadData();
 
-// إخفاء عبارة الانتظار تدريجياً بعد 6 ثواني
+// إخفاء عبارة الانتظار
 setTimeout(() => {
   const loadingEl = document.getElementById("loading");
-  loadingEl.style.opacity = "0";
-  setTimeout(() => loadingEl.style.display = "none", 2000); // بعد انتهاء التلاشي
-}, 6000);
+  if(loadingEl) {
+      loadingEl.style.opacity = "0";
+      setTimeout(() => loadingEl.style.display = "none", 1500);
+  }
+}, 5000);
 </script>
-
 
 </body>
 </html>
